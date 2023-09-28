@@ -5,7 +5,7 @@
             <a
               class="btn text-white btn-floating m-1"
               style="background-color: #333333;"
-              href="https://github.com/tri-white/tri-white"
+              href="https://github.com/tri-white"
               target="_blank"
               role="button"
               ><i class="fab fa-github"></i
@@ -14,7 +14,7 @@
         </div>
     <!-- Назва та дані сайту-->
     <div class="text-center p-3 bg-primary">
-          © 2020
-          <a class="text-white" href="#top">Trunin-blog.com</a>
+          © 2023
+          <a class="text-white" href="welcome.blade.php">Trunin-blog</a>
         </div>
   </footer>
