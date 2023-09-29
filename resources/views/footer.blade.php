@@ -15,6 +15,6 @@
     <!-- Назва та дані сайту-->
     <div class="text-center p-3 bg-primary">
           © 2023
-          <a class="text-white" href="welcome.blade.php">Trunin-blog</a>
+          <a class="text-white" href="/">Trunin-blog</a>
         </div>
   </footer>
