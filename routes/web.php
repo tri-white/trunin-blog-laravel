@@ -24,4 +24,6 @@ Route::get('/about', function () {
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/registration', [UserController::class, 'registration'])->name('registration');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+
 

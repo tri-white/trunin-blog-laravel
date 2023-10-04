@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        chema::create('comments', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('userid');
             $table->unsignedBigInteger('postid');
