@@ -44,4 +44,7 @@
     </div>
   </main>
  
+  @push('js')
+        <script src="{{ asset('js/my-script.js') }}"></script>
+    @endpush
 @endsection
