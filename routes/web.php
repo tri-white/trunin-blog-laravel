@@ -20,3 +20,8 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+
+Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::get('/registration', [UserController::class, 'registration'])->name('registration');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+

@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     use HasFactory;
+    public function get_data($id){
+        
+    }
 }

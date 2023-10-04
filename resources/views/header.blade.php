@@ -24,9 +24,9 @@
                            data-bs-toggle="dropdown" aria-expanded="false">
                             @if(session('myblog_userid'))
                                 <?php
-                                $user = new User();
-                                $user_data = $user->get_data(session('myblog_userid'));
-                                echo $user_data['login'];
+                                //$user = new User();
+                                //$user_data = $user->get_data(session('myblog_userid'));
+                                //echo $user_data['login'];
                                 ?>
                             @else
                                 Профіль
@@ -35,11 +35,11 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @if(session('myblog_userid'))
                                 <li><a class="dropdown-item"
-                                       href="{{ url('/profile') }}/{{ session('myblog_userid') }}">Мій профіль</a></li>
-                                <li><a class="dropdown-item" href="{{ url('/logout') }}">Вихід з профілю</a></li>
+                                       href="{{ route('profile') }}/{{ session('myblog_userid') }}">Мій профіль</a></li>
+                                <li><a class="dropdown-item" href="{{ route('logout') }}">Вихід з профілю</a></li>
                             @else
-                                <li><a class="dropdown-item" href="{{ url('/login') }}">Авторизація</a></li>
-                                <li><a class="dropdown-item" href="{{ url('/registration') }}">Реєстрація</a></li>
+                                <li><a class="dropdown-item" href="{{ route('login') }}">Авторизація</a></li>
+                                <li><a class="dropdown-item" href="{{ route('registration') }}">Реєстрація</a></li>
                             @endif
                         </ul>
                     </li>
