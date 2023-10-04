@@ -11,9 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        chema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('userid');
+            $table->unsignedBigInteger('postid');
+            $table->text('description');
+            $table->date('date');
             $table->timestamps();
+
+            $table->foreign('userid')->references('id')->on('users');
+
+            $table->foreign('postid')->references('id')->on('posts');
         });
     }
 

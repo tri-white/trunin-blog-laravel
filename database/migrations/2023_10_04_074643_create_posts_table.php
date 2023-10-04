@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->text('description');
+            $table->string('photo')->nullable();
+            $table->date('date');
+            $table->unsignedBigInteger('userid');
+            $table->enum('category', ['Спорт та розваги', 'Наука та техніка', 'Освіта та наука']);
+            $table->string('tags')->nullable();
             $table->timestamps();
+
+            $table->foreign('userid')->references('id')->on('users');
         });
     }
 
