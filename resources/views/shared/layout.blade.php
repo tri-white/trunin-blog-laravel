@@ -16,11 +16,11 @@
       @stack('css')
   </head>
   <body>
-  	@include('header')
+  	@include('shared/header')
  
   		@yield('content')
  
-  	@include('footer')
+  	@include('shared/footer')
  
   	@stack('js')
     
