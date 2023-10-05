@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('userid');
             $table->unsignedBigInteger('postid');
             $table->text('description');
-            $table->date('date');
             $table->timestamps();
 
             $table->foreign('userid')->references('id')->on('users');
