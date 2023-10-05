@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('shared/layout')
  
 @section('content')
   <main>
@@ -44,4 +44,7 @@
     </div>
   </main>
  
+  @push('js')
+        <script src="{{ asset('js/my-script.js') }}"></script>
+    @endpush
 @endsection
