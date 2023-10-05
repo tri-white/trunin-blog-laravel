@@ -5,7 +5,7 @@
             <a
               class="btn text-white btn-floating m-1"
               style="background-color: #333333;"
-              href="https://github.com/tri-white"
+              href="https://github.com/tri-white/trunin-blog-laravel"
               target="_blank"
               role="button"
               ><i class="fab fa-github"></i
