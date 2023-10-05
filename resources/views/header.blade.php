@@ -1,6 +1,4 @@
-@extends('layout')
 
-@section('content')
 <header>
     <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom border-2 border-primary">
         <div class="container">
@@ -37,4 +35,3 @@
         </div>
     </nav>
 </header>
-@endsection
