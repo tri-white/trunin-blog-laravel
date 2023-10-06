@@ -10,6 +10,7 @@
                     @if ($errors->has('login'))
                         <div class="alert alert-danger">{{ $errors->first('login') }}</div>
                     @endif
+
                     @if ($errors->has('password'))
                         <div class="alert alert-danger">{{ $errors->first('password') }}</div>
                     @endif
@@ -17,11 +18,12 @@
                     @if ($errors->has('password2'))
                         <div class="alert alert-danger">{{ $errors->first('password2') }}</div>
                     @endif
+
                     @if(session('existing-user'))
                         <div class="alert alert-danger">{{ session('existing-user') }}</div>
                     @endif
 
-                <form method="post" action="{{ route('register') }}" autocomplete="off">
+                <form method="post" action="{{ route('registration') }}" autocomplete="off">
                     @csrf
                     <div class="mb-3">
                         <label for="loginInput" class="form-label">Логін</label>

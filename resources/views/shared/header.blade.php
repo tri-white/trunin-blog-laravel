@@ -25,8 +25,8 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{ route('profile') }}">Мій профіль</a></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}">Вихід з профілю</a></li>
-                                <li><a class="dropdown-item" href="{{ route('login') }}">Авторизація</a></li>
-                                <li><a class="dropdown-item" href="{{ route('registration') }}">Реєстрація</a></li>
+                                <li><a class="dropdown-item" href="{{ route('loginView') }}">Авторизація</a></li>
+                                <li><a class="dropdown-item" href="{{ route('registrationView') }}">Реєстрація</a></li>
                         </ul>
                     </li>
                 </ul>
