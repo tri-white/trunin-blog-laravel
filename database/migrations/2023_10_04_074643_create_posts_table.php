@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->text('description');
             $table->string('photo')->nullable();
-            $table->date('date');
             $table->unsignedBigInteger('userid');
-            $table->enum('category', ['Спорт та розваги', 'Наука та техніка', 'Освіта та наука']);
+            $table->enum('category', ['Розваги', 'Життя та спорт', 'Освіта та наука'])->nullable();
             $table->string('tags')->nullable();
             $table->timestamps();
 
