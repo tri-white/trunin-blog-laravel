@@ -5,8 +5,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="profile-image mx-auto" style="height:150px; width:150px;">
-                <img src="{{ Auth::user()->photo ?? './images/user_male.jpg' }}" style="width:100%; height:100%; object-fit: contain;"
-                     class="rounded-circle border border-1 border-dark" alt="Profile Picture">
+            <img src="{{ Auth::check() && Auth::user()->photo ? asset(Auth::user()->photo) : asset('images/user_male.jpg') }}"
+     style="width:100%; height:100%; object-fit: contain;"
+     class="rounded-circle border border-1 border-dark" alt="Profile Picture">
             </div>
 
             @if(Auth::check())
