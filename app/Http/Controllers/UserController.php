@@ -48,7 +48,7 @@ class UserController extends Controller
     {
         $request->validate([
             'login' => 'required|string|max:255',
-            'password' => 'required|string|min:8|regex:/[0-9]/',
+            'password' => 'required|string|min:8',
             'password2' => 'required|string|same:password',
         ]);
         

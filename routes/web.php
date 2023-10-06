@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +31,9 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::post('/create-post', [PostController::class, 'create'])->name('create-post');
+
 
 
 
