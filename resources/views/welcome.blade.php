@@ -1,7 +1,10 @@
 @extends('shared/layout')
- 
+@push('css')
+<link rel="stylesheet" type="text/css" href="{{ asset('test.css') }}">
+    @endpush
 @section('content')
   <main>
+
 
     <!-- CREATE POST -->
 
@@ -14,9 +17,9 @@
         <!-- Search bar -->
         <div class="row d-flex justify-content-center">
           <div class="col-lg-8 col-md-10 col-sm-12 text-center">
-            <form method="post" action="">
+            <form method="get" action="">
               <div class="input-group">
-                <button type="submit" class="btn btn-outline-dark">Знайти</button>
+                <button id="search-button" type="submit" class="btn btn-outline-dark">Знайти</button>
               </div>
               <div class="d-flex justify-content-between mb-2 mt-2">
                 <div class="col-lg-6">
@@ -44,7 +47,9 @@
     </div>
   </main>
  
-  @push('js')
-        <script src="{{ asset('js/my-script.js') }}"></script>
-    @endpush
+
 @endsection
+
+@push('js')
+        <script src="{{ asset('my-script.js') }}"></script>
+    @endpush

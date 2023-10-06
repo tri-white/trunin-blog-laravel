@@ -1,1 +1,0 @@
-alert('hello world! this is pushed JS to layout');
