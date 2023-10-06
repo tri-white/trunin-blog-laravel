@@ -6,7 +6,22 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <h1 class="mb-4 text-center">Реєстрація</h1>
-                <form method="post" action="{{ url('/register') }}" autocomplete="off">
+
+                    @if ($errors->has('login'))
+                        <div class="alert alert-danger">{{ $errors->first('login') }}</div>
+                    @endif
+                    @if ($errors->has('password'))
+                        <div class="alert alert-danger">{{ $errors->first('password') }}</div>
+                    @endif
+
+                    @if ($errors->has('password2'))
+                        <div class="alert alert-danger">{{ $errors->first('password2') }}</div>
+                    @endif
+                    @if(session('existing-user'))
+                        <div class="alert alert-danger">{{ session('existing-user') }}</div>
+                    @endif
+
+                <form method="post" action="{{ route('register') }}" autocomplete="off">
                     @csrf
                     <div class="mb-3">
                         <label for="loginInput" class="form-label">Логін</label>
