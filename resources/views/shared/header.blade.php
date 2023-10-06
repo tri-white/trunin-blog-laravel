@@ -1,4 +1,3 @@
-
 <header>
     <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom border-2 border-primary">
         <div class="container">
@@ -20,13 +19,20 @@
                     <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
                         <a class="nav-link dropdown-toggle pe-auto" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
-                                Профіль
+                           @if(Auth::check())
+                               {{ Auth::user()->login }}
+                           @else
+                               Профіль
+                           @endif
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @if(Auth::check())
                                 <li><a class="dropdown-item" href="{{ route('profile') }}">Мій профіль</a></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}">Вихід з профілю</a></li>
+                            @else
                                 <li><a class="dropdown-item" href="{{ route('loginView') }}">Авторизація</a></li>
                                 <li><a class="dropdown-item" href="{{ route('registrationView') }}">Реєстрація</a></li>
+                            @endif
                         </ul>
                     </li>
                 </ul>

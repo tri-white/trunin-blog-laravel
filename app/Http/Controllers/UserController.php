@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -22,7 +23,7 @@ class UserController extends Controller
     }
     public function logout()
     {
-        session()->forget('user_id');
+        Auth::logout();
 
         return redirect()->route('welcome');
     }
@@ -33,22 +34,15 @@ class UserController extends Controller
             'password' => 'required|string',
         ]);
         
-        $login = $request->input('login');
-        $password = $request->input('password');
-
-        $user = User::where('login', $login)->first();
-
-        if (!$user) {
-            return redirect()->back()->with('error', 'Користувача з таким логіном не знайдено.');
+        $credentials = [
+            'login' => $request->input('login'),
+            'password' => $request->input('password'),
+        ];
+    
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('welcome');
         }
-
-        if (!Hash::check($password, $user->password)) {
-            return redirect()->back()->with('error', 'Неправильний пароль.');
-        }
-
-        session()->put('user_id', $user->id);
-
-        return redirect()->route('welcome');
+        return redirect()->back()->with('error', 'Неправильний логін або пароль.');
     }
     public function registration(Request $request)
     {
