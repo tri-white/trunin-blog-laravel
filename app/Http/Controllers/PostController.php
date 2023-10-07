@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    public function index()
+    {
+        $posts = Post::all();
+
+        return view('welcome', compact('posts'));
+    }
     public function create(Request $request)
     {
         $request->validate([
@@ -15,22 +24,33 @@ class PostController extends Controller
         ]);
 
         if (!$request->input('post-description') && !$request->hasFile('post-image')) {
-            return view('welcome')->with('empty-post', 'Потрібно заповнити хоча б одне поле: Текст або Фото');
+            return redirect()->route('welcome')->with('empty-post', 'Потрібно заповнити хоча б одне поле: Текст або Фото');
         }
 
         $post = new Post();
         $post->description = $request->input('post-description');
-        $post->category = $request->input('post-category');
+        if($request->input('post-category') == "no"){
+            $post->category=null;
+        }
+        else if($request->input('post-category') == "StudyScience"){
+            $post->category = "Освіта та наука";
+        }
+        else if($request->input('post-category') == "Entertainment"){
+            $post->category = "Розваги";
+        }
+        else if($request->input('post-category') == "LifeSport"){
+            $post->category = "Життя та спорт";
+        }
+        $post->userid = Auth::user()->id;
 
-        // Handle image upload, if provided
         if ($request->hasFile('post-image')) {
-            $imagePath = $request->file('post-image')->store('posts'); // Adjust the storage path as needed
-            $post->image = $imagePath;
+            $imagePath = $request->file('post-image')->store('posts');
+            $post->photo = $imagePath;
         }
 
         $post->save();
 
-        return view('welcome')->with('success-post', 'Пост успішно створено.');
+        return redirect()->route('welcome')->with('success-post', 'Пост успішно створено.');
     }
 
 }

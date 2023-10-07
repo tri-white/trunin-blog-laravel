@@ -15,6 +15,7 @@
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 col-md-8 col-sm-12">
             <form method="post" action="{{ route('create-post') }}" enctype="multipart/form-data">
+              @csrf
                 <textarea name="post-description" class="form-control" id="contentInput" rows="5"
                   placeholder="Що у вас нового?"></textarea>
                 <div class="row d-flex">
@@ -65,22 +66,22 @@
                 </div>
           </div>
           </form>
-
         </div>
-
         <div class="mb-5 mt-5 col-lg-12 text-center display-2">
           Пости
         </div>
         <div class="row d-flex justify-content-center">
           <div class="col-lg-8 col-md-10 col-sm-12">
-          </div>
 
+            @foreach($posts as $post)
+             
+
+            @endforeach
+          </div>
         </div>
       </div>
     </div>
   </main>
- 
-
 @endsection
 
 @push('js')

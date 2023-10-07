@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function profile()
+    public function profile($userid)
     {
-        return view('user/profile');
+        $user = User::where('id',$userid)->first();
+        return view('user/profile')->with('user',$user);
     }
     public function registrationView()
     {

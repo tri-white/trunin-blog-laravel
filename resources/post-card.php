@@ -1,17 +1,3 @@
- <?php 
-
-  $comm= new Comment();
-  $postid = $row_post['postid'];
-       $comms= $comm->get_comments($postid);
-       if(isset($_SESSION['myblog_userid'])){
-          $user_like = new Like();
-          $like = $user_like->check_like($_SESSION['myblog_userid'], $postid);
-       }
-
-       $query = "SELECT COUNT(*) from comment where postid='$postid'";
-       $db = new Database();
-       $comm_count = $db->read($query);
- ?>
 
  <!-- POST -->
  <div class="card mb-5">

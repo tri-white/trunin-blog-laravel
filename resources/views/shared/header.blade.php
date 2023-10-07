@@ -27,7 +27,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @if(Auth::check())
-                                <li><a class="dropdown-item" href="{{ route('profile') }}">Мій профіль</a></li>
+                                <li><a class="dropdown-item" href="{{ route('profile', Auth::user()->id) }}">Мій профіль</a></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}">Вихід з профілю</a></li>
                             @else
                                 <li><a class="dropdown-item" href="{{ route('loginView') }}">Авторизація</a></li>
