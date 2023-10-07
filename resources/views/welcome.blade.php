@@ -106,7 +106,7 @@
                           </p>
                           @endif
                           @if ($post->photo)
-                              <img src="{{ asset(C:\Users\olego\Desktop\Веб Ковальчук\blog_app\storage\app\{{ $post->photo }}) }}"
+                              <img src="{{ $post->photo }}"
                                   class="card-img-top border border-1 border-dark" alt="Image Content">
                           @endif
                       </a>
