@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +14,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [PostController::class, 'index'])->name('welcome');
 
 Route::get('/about', function () {
     return view('about');
@@ -28,8 +27,12 @@ Route::post('/registration', [UserController::class, 'registration'])->name('reg
 Route::get('/login', [UserController::class, 'loginView'])->name('loginView');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 
-Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+Route::get('/profile/{userid}', [UserController::class, 'profile'])->name('profile');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+
+Route::post('/', [PostController::class, 'create'])->name('create-post');
+
 
 
 

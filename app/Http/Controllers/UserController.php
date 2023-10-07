@@ -9,17 +9,18 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function profile()
+    public function profile($userid)
     {
-        return view('profile');
+        $user = User::where('id',$userid)->first();
+        return view('user/profile')->with('user',$user);
     }
     public function registrationView()
     {
-        return view('registration');
+        return view('user/registration');
     }
     public function loginView()
     {
-        return view('login');
+        return view('user/login');
     }
     public function logout()
     {
@@ -48,7 +49,7 @@ class UserController extends Controller
     {
         $request->validate([
             'login' => 'required|string|max:255',
-            'password' => 'required|string|min:8|regex:/[0-9]/',
+            'password' => 'required|string|min:8',
             'password2' => 'required|string|same:password',
         ]);
         
