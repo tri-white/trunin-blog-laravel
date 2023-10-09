@@ -27,10 +27,12 @@
                 <h5>{{ $user->login }}</h5>
                 @if(Auth::check())
                 @if(Auth::user()->admin == 1 && $user->id !== Auth::user()->id)
-                    <a class="my-auto me-4 link-dark"
-                       href="{{ route('remove-user', ['userid'=>$user->id]) }}">
-                        <i class="fa fa-trash-can"></i>
-                    </a>
+                    <form method="POST" action="{{ route('remove-user', ['userid'=>$user->id]) }}">
+                        @csrf
+                        <button type="submit" style="border: none; background: none; cursor: pointer;">
+                            <i class="fa fa-trash-can"></i>
+                        </button>
+                    </form>
                 @endif
                 @endif
             </div>

@@ -34,9 +34,9 @@ Route::post('/', [PostController::class, 'create'])->name('create-post');
 
 Route::post('/comment/{userid}/{postid}', [CommentController::class, 'create'])->name('add-comment');
 
-Route::post('/removeuser/{userid}', [AdminController::class, 'remove-user'])->name('remove-user');
-Route::post('/removepost/{postid}', [AdminController::class, 'remove-post'])->name('remove-post');
-Route::post('/removecomment/{commentid}', [AdminController::class, 'remove-comment'])->name('remove-comment');
+Route::post('/removeuser/{userid}', [AdminController::class, 'removeUser'])->name('remove-user');
+Route::post('/removepost/{postid}', [AdminController::class, 'removePost'])->name('remove-post');
+Route::post('/removecomment/{commentid}', [AdminController::class, 'removeComment'])->name('remove-comment');
 
 
 

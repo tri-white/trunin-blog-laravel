@@ -39,10 +39,12 @@
                 <div class="d-flex justify-content-end">
                     @if(Auth::check())
                         @if (Auth::user()->admin == 1)
-                            <a class="my-auto me-4 link-dark"
-                                href="{{ route('remove-post', ['postid'=>$post->id]) }}">
-                                <i class="fa fa-trash-can"></i>
-                            </a>
+                            <form method="POST" action="{{ route('remove-post', ['postid'=>$post->id]) }}">
+                                @csrf
+                                <button type="submit" style="border: none; background: none; cursor: pointer;">
+                                    <i class="fa fa-trash-can"></i>
+                                </button>
+                            </form>
                         @endif
                     @endif
                 </div>
@@ -102,7 +104,7 @@
    <!-- YOUR COMMENT -->
     @if(Auth::check())
    <div class="card-body">
-     <form method="POST" action="{{ route('add-comment', ['userid' => $user->id, 'postid' => $post->id]) }}" autocomplete="off">
+     <form method="POST" action="{{ route('add-comment', ['userid' => Auth::user()->id, 'postid' => $post->id]) }}" autocomplete="off">
         @csrf
        <div class="input-group align-items-center">
          <input name="description" type="text" class="form-control" placeholder="Ваш коментар"
