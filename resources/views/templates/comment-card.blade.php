@@ -18,7 +18,7 @@
         <div class="footer-comment align-items-center d-flex justify-content-end align-items-center">
             @if(Auth::check())
                 @if(Auth::user()->admin == 1)
-                <a class="my-auto me-4 link-dark" href="">
+                <a class="my-auto me-4 link-dark" href="{{ route('remove-comment', 'id'=>$comm->id) }}">
                     <i class="fa fa-trash-can"></i>
                 </a>
                 @endif

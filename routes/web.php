@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +33,12 @@ Route::get('/search', [PostController::class, 'searchAction'])->name('post-searc
 Route::post('/', [PostController::class, 'create'])->name('create-post');
 
 Route::post('/comment/{userid}/{postid}', [CommentController::class, 'create'])->name('add-comment');
+
+Route::post('/removeuser/{userid}', [AdminController::class, 'remove-user'])->name('remove-user');
+Route::post('/removepost/{postid}', [AdminController::class, 'remove-post'])->name('remove-post');
+Route::post('/removecomment/{commentid}', [AdminController::class, 'remove-comment'])->name('remove-comment');
+
+
 
 
 
