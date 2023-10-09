@@ -48,6 +48,21 @@
                 </div>
             </div>
         </div>
+      
     </div>
+   <!-- YOUR COMMENT -->
+    @if(Auth::check())
+   <div class="card-body">
+     <form method="POST" action="{{ route('add-comment', ['userid' => $user->id, 'postid' => $post->id]) }}" autocomplete="off">
+        @csrf
+       <div class="input-group align-items-center">
+         <input name="description" type="text" class="form-control" placeholder="Ваш коментар"
+           aria-label="Add a comment" aria-describedby="comment-button">
+         <button class="btn btn-primary" type="submit" id="comment-button">Додати коментар</button>
+       </div>
+     </form>
+   </div>
+    @endif
+    <!-- END YOUR COMMENT -->
 </div>
 <!-- POST END -->

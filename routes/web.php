@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 
 Route::post('/', [PostController::class, 'create'])->name('create-post');
+
+Route::post('/comment/{userid}/{postid}', [CommentController::class, 'create'])->name('add-comment');
 
 
 
