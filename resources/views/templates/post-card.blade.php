@@ -56,27 +56,29 @@
      <li class="list-group-item">
         @php
             $comms = $post->comms();
+            $commentCount = count($comms);
         @endphp
-       @if($comms)
-            @foreach ($comms as $comm) {
+
+        @if($commentCount > 0)
+            @foreach($comms as $comm)
                 @php
-                    $row_user = \App\Models\User::where('id',$comm->userid);
+                    $row_user = \App\Models\User::where('id', $comm->userid)->first();
                 @endphp
-                include("templates/comment-card.php");
-            }
-       @else
+                @include("templates/comment-card.php")
+            @endforeach
+        @else
             <div class='my-2 text-muted col-lg-12 text-center fs-5'>
                 Немає комментарів.
             </div>
-       @endif
-       <?php if($comm_count!=false && $comm_count[0]['COUNT(*)']>2) :?>
+        @endif
+       @if($commentCount>2)
        <div class="col-12 mt-4">
-         <a href="post-card_details.php?postid=<?php echo $row_post['postid']; ?>"
+         <a href=""
            class="text-decoration-none link-dark text-light py-2">
            <div class="container-fluid bg-primary text-center">
 
              <p>
-             Переглянути ще <?php echo $comm_count[0]['COUNT(*)']-2 ?> комментарів
+             Переглянути ще {{ $commentCount-2 }} комментарів
              </p>
 
            </div>
@@ -84,7 +86,7 @@
 
        </div>
 
-       <?php endif; ?>
+       @endif
      </li>
    </ul>
    <!-- END POST COMMENTS -->
