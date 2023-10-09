@@ -100,14 +100,14 @@
                           class="text-decoration-none link-dark">
                           @if ($post->description)
                           <p class="card-text">
-                              <pre class="fs-5" style="white-space: pre-wrap; text-align: justify;">
+                              <pre class="fs-5">
                                   {{ $post->description }}
                               </pre>
                           </p>
                           @endif
                           @if ($post->photo)
-                              <img src="{{ $post->photo }}"
-                                  class="card-img-top border border-1 border-dark" alt="Image Content">
+                                <img src="{{ asset('storage/' . $post->photo) }}" alt="Post Image"
+                                  class="card-img-top border border-1 border-dark">
                           @endif
                       </a>
                       <div class="d-flex justify-content-between mt-2 align-items-center">
@@ -116,11 +116,13 @@
                           </div>
                           <div class="col-lg-6">
                               <div class="d-flex justify-content-end">
+                                @if(Auth::check())
                                   @if (Auth::user()->admin == 1)
                                       <a class="my-auto me-4 link-dark"
                                           href="">
                                           <i class="fa fa-trash-can"></i>
                                       </a>
+                                  @endif
                                   @endif
                               </div>
                           </div>
