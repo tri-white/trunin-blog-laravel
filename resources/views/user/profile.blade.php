@@ -28,7 +28,7 @@
                 @if(Auth::check())
                 @if(Auth::user()->admin == 1 && $user->id !== Auth::user()->id)
                     <a class="my-auto me-4 link-dark"
-                       href="{{ route('remove-user', 'id'=>$user->id) }}">
+                       href="{{ route('remove-user', ['userid'=>$user->id]) }}">
                         <i class="fa fa-trash-can"></i>
                     </a>
                 @endif

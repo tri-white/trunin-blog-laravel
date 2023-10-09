@@ -5,8 +5,8 @@
 @section('content')
   <main>
     @if(Auth::check())
-      @if(session('success-post'))
-          <div class="alert alert-success">{{ session('success-post') }}</div>
+      @if(session('success'))
+          <div class="alert alert-success">{{ session('success') }}</div>
       @endif
       @if(session('empty-post'))
           <div class="alert alert-danger">{{ session('empty-post') }}</div>

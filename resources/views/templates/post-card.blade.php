@@ -40,7 +40,7 @@
                     @if(Auth::check())
                         @if (Auth::user()->admin == 1)
                             <a class="my-auto me-4 link-dark"
-                                href="{{ route('remove-post', 'id'=>$post->id) }}">
+                                href="{{ route('remove-post', ['postid'=>$post->id]) }}">
                                 <i class="fa fa-trash-can"></i>
                             </a>
                         @endif
