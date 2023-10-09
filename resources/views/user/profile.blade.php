@@ -5,9 +5,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="profile-image mx-auto" style="height:150px; width:150px;">
-            <img src="{{ $user->photo ? asset($user->photo) : asset('images/user_male.jpg') }}"
-     style="width:100%; height:100%; object-fit: contain;"
-     class="rounded-circle border border-1 border-dark" alt="Profile Picture">
+                <img src="{{ $user->photo ? asset($user->photo) : asset('images/user_male.jpg') }}"
+                     style="width:100%; height:100%; object-fit: contain;"
+                     class="rounded-circle border border-1 border-dark" alt="Profile Picture">
             </div>
 
             @if(Auth::check())
@@ -45,7 +45,9 @@
                         Пости
                     </div>
                     <div class="col-lg-6 col-md-8 col-sm-12">
-                        <!-- here should be profile user's posts -->
+                        @foreach($user->posts as $post)
+                            @include('templates/post-card');
+                        @endforeach
                     </div>
                 </div>
             </div>
