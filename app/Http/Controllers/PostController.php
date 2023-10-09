@@ -14,7 +14,7 @@ class PostController extends Controller
         $sort = "date-asc";
         $key = "";
         $cat = "all";
-        $posts = search($key,$cat,$sort);
+        $posts = $this->search($key,$cat,$sort);
 
         return view('welcome', compact('posts', 'sort', 'key', 'cat'));
 
@@ -54,7 +54,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect()->route('welcome')->with('success-post', 'Пост успішно створено.');
+        return redirect()->route('welcome')->with('success', 'Пост успішно створено.');
     }
 
     public function searchAction(Request $request)
@@ -63,7 +63,7 @@ class PostController extends Controller
         $cat = $request->input('post-category-filter');
         $sort = $request->input('post-sort');
 
-        $posts = search($key,$cat,$sort);
+        $posts = $this->search($key,$cat,$sort);
 
         return redirect()->view('welcome', compact('posts', 'key', 'cat', 'sort'));
     }

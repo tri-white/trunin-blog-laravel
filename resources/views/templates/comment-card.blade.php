@@ -17,10 +17,14 @@
         <p class="card-text mt-2 comment-text fs-7 mb-0 text-wrap">{{ $comm->description }}</p>
         <div class="footer-comment align-items-center d-flex justify-content-end align-items-center">
             @if(Auth::check())
-                @if(Auth::user()->admin == 1)
-                <a class="my-auto me-4 link-dark" href="">
-                    <i class="fa fa-trash-can"></i>
-                </a>
+                @if(Auth::user()->admin == 1 || Auth::user()->id == $row_user->id)
+                <form method="POST" action="{{ route('remove-comment', ['commentid'=>$comm->id]) }}">
+                    @csrf
+                    <button type="submit" style="border: none; background: none; cursor: pointer;">
+                        <i class="fa fa-trash-can"></i>
+                    </button>
+                </form>
+
                 @endif
             @endif
         </div>

@@ -26,11 +26,13 @@
             <div class="profile-info text-center mt-2">
                 <h5>{{ $user->login }}</h5>
                 @if(Auth::check())
-                @if(Auth::user()->admin == 1 && $user->id !== Auth::user()->id)
-                    <a class="my-auto me-4 link-dark"
-                       href="">
-                        <i class="fa fa-trash-can"></i>
-                    </a>
+                @if((Auth::user()->admin == 1 && $user->id !== Auth::user()->id) || Auth::user()->id == $user->id)
+                    <form method="POST" action="{{ route('remove-user', ['userid'=>$user->id]) }}">
+                        @csrf
+                        <button type="submit" style="border: none; background: none; cursor: pointer;">
+                            <i class="fa fa-trash-can"></i>
+                        </button>
+                    </form>
                 @endif
                 @endif
             </div>
