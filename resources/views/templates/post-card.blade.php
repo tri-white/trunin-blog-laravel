@@ -55,30 +55,37 @@
    <ul class="list-group list-group-flush">
      <li class="list-group-item">
         @php
-            $comms = $post->comms();
+            $comms = $post->comms()->get();
             $commentCount = $comms->count();
+            $counter= 0;
+            $showCount = 2;
         @endphp
-
+        <!-- but show only 2 comments -->
         @if($commentCount > 0)
             @foreach($comms as $comm)
                 @php
-                    $row_user = \App\Models\User::where('id', $comm->userid)->first();
+                    $row_user = \App\Models\User::find($comm->userid);
+                    $counter = $counter+1;
                 @endphp
-                @include('comment-card');
+                @if($counter>$showCount)
+                    @break
+                @endif
+                @include('templates/comment-card')
+                
             @endforeach
         @else
             <div class='my-2 text-muted col-lg-12 text-center fs-5'>
                 Немає комментарів.
             </div>
         @endif
-       @if($commentCount>2)
+       @if($commentCount>$showCount)
        <div class="col-12 mt-4">
          <a href=""
            class="text-decoration-none link-dark text-light py-2">
            <div class="container-fluid bg-primary text-center">
 
              <p>
-             Переглянути ще {{ $commentCount-2 }} комментарів
+             Переглянути ще {{ $commentCount-$showCount }} комментарів
              </p>
 
            </div>
