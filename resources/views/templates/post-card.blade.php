@@ -56,7 +56,7 @@
      <li class="list-group-item">
         @php
             $comms = $post->comms();
-            $commentCount = count($comms);
+            $commentCount = $comms->count();
         @endphp
 
         @if($commentCount > 0)
@@ -64,7 +64,7 @@
                 @php
                     $row_user = \App\Models\User::where('id', $comm->userid)->first();
                 @endphp
-                @include("templates/comment-card.php")
+                @include('comment-card');
             @endforeach
         @else
             <div class='my-2 text-muted col-lg-12 text-center fs-5'>
