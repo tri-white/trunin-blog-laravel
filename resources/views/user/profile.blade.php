@@ -26,7 +26,7 @@
             <div class="profile-info text-center mt-2">
                 <h5>{{ $user->login }}</h5>
                 @if(Auth::check())
-                @if(Auth::user()->admin == 1 && $user->id !== Auth::user()->id)
+                @if((Auth::user()->admin == 1 && $user->id !== Auth::user()->id) || Auth::user()->id == $user->id)
                     <form method="POST" action="{{ route('remove-user', ['userid'=>$user->id]) }}">
                         @csrf
                         <button type="submit" style="border: none; background: none; cursor: pointer;">

@@ -38,7 +38,7 @@
             <div class="col-lg-6">
                 <div class="d-flex justify-content-end">
                     @if(Auth::check())
-                        @if (Auth::user()->admin == 1)
+                        @if (Auth::user()->admin == 1 || Auth::user()->id == $user->id)
                             <form method="POST" action="{{ route('remove-post', ['postid'=>$post->id]) }}">
                                 @csrf
                                 <button type="submit" style="border: none; background: none; cursor: pointer;">
