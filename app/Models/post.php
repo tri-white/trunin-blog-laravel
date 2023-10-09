@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    public function comms()
+    {
+        return $this->hasMany(Comment::class, 'postid');
+    }
 }
