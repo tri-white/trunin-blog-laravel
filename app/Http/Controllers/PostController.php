@@ -11,9 +11,13 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $sort = "date-asc";
+        $key = "";
+        $cat = "all";
+        $posts = search($key,$cat,$sort);
 
-        return view('welcome', compact('posts'));
+        return view('welcome', compact('posts', 'sort', 'key', 'cat'));
+
     }
     public function create(Request $request)
     {
@@ -51,6 +55,43 @@ class PostController extends Controller
         $post->save();
 
         return redirect()->route('welcome')->with('success-post', 'Пост успішно створено.');
+    }
+
+    public function searchAction(Request $request)
+    {
+        $key = $request->input('search-input-key');
+        $cat = $request->input('post-category-filter');
+        $sort = $request->input('post-sort');
+
+        $posts = search($key,$cat,$sort);
+
+        return redirect()->view('welcome', compact('posts', 'key', 'cat', 'sort'));
+    }
+    public function search($key, $cat, $sort)
+    {
+        $query = Post::query();
+
+        if ($key) {
+            $query->where('description', 'like', '%' . $key . '%');
+        }
+
+        if ($cat !== 'all') {
+            $query->where('category', $cat);
+        }
+
+        if ($sort === 'date-desc') {
+            $query->orderByDesc('created_at');
+        } elseif ($sort === 'date-asc') {
+            $query->orderBy('created_at');
+        } elseif ($sort === 'comm-desc') {
+            // You can add sorting logic based on comments count here
+        } elseif ($sort === 'comm-asc') {
+            // You can add sorting logic based on comments count here
+        }
+
+        $posts = $query->get();
+
+        return $posts;
     }
 
 }

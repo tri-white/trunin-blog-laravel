@@ -60,7 +60,7 @@
             $counter= 0;
             $showCount = 2;
         @endphp
-        <!-- but show only 2 comments -->
+
         @if($commentCount > 0)
             @foreach($comms as $comm)
                 @php

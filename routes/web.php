@@ -15,8 +15,6 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', [PostController::class, 'index'])->name('welcome');
-
 Route::get('/about', function () {
     return view('about');
 })->name('about');
@@ -24,14 +22,13 @@ Route::get('/about', function () {
 
 Route::get('/registration', [UserController::class, 'registrationView'])->name('registrationView');
 Route::post('/registration', [UserController::class, 'registration'])->name('registration');
-
 Route::get('/login', [UserController::class, 'loginView'])->name('loginView');
 Route::post('/login', [UserController::class, 'login'])->name('login');
-
 Route::get('/profile/{userid}', [UserController::class, 'profile'])->name('profile');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-
+Route::get('/', [PostController::class, 'index'])->name('welcome');
+Route::get('/search', [PostController::class, 'searchAction'])->name('post-search');
 Route::post('/', [PostController::class, 'create'])->name('create-post');
 
 Route::post('/comment/{userid}/{postid}', [CommentController::class, 'create'])->name('add-comment');
