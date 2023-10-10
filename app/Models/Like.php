@@ -8,8 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Like extends Model
 {
     use HasFactory;
-    public function change($userid, $postid){
-        $like = Like::where('userid',$userid);
-        return false;
-    }
 }

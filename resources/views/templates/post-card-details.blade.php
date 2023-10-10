@@ -1,5 +1,5 @@
 <!-- POST -->
-<div class="card mb-5">
+<div class="card mb-5 col-6 mx-auto px-auto mt-5">
     <div class="card-body">
         <a href="{{ route('profile', $user->id) }}" class="text-decoration-none link-dark">
             <div class="d-flex">
@@ -60,17 +60,18 @@
                         <i class="fa fa-heart"></i>
                     </a>
                     @else
-                        @if(Auth::check())
-                        <a href=""
-                            class="btn btn-outline-danger" id="like-button">
-                            <i class="fa fa-heart"></i>
-                        </a>
-                        @else
-                        <a href=""
-                            class="btn btn-danger" id="like-button">
-                            <i class="fa fa-heart"></i>
-                        </a>
-                        @endif
+                        <form method="POST" action="{{ route('like', [$post->id, Auth::user()->id]) }}">
+                            @csrf
+                            @if(Auth::check())
+                                <button type="submit" class="btn btn-outline-danger" id="like-button">
+                                    <i class="fa fa-heart"></i>
+                                </button>
+                            @else
+                                <button type="submit" class="btn btn-danger" id="like-button">
+                                    <i class="fa fa-heart"></i>
+                                </button>
+                            @endif
+                        </form>
                     @endif
                 </div>
             </div>
@@ -84,19 +85,13 @@
         @php
             $comms = $post->comms()->get();
             $commentCount = $comms->count();
-            $counter= 0;
-            $showCount = 2;
         @endphp
 
         @if($commentCount > 0)
             @foreach($comms as $comm)
                 @php
                     $row_user = \App\Models\User::find($comm->userid);
-                    $counter = $counter+1;
                 @endphp
-                @if($counter>$showCount)
-                    @break
-                @endif
                 @include('templates/comment-card')
                 
             @endforeach

@@ -56,17 +56,18 @@
                         <i class="fa fa-heart"></i>
                     </a>
                     @else
-                        @if(Auth::check())
-                        <a href=""
-                            class="btn btn-outline-danger" id="like-button">
-                            <i class="fa fa-heart"></i>
-                        </a>
-                        @else
-                        <a href=""
-                            class="btn btn-danger" id="like-button">
-                            <i class="fa fa-heart"></i>
-                        </a>
-                        @endif
+                        <form method="POST" action="{{ route('like', [$post->id, Auth::user()->id]) }}">
+                            @csrf
+                            @if(Auth::check())
+                                <button type="submit" class="btn btn-outline-danger" id="like-button">
+                                    <i class="fa fa-heart"></i>
+                                </button>
+                            @else
+                                <button type="submit" class="btn btn-danger" id="like-button">
+                                    <i class="fa fa-heart"></i>
+                                </button>
+                            @endif
+                        </form>
                     @endif
                 </div>
             </div>
@@ -103,7 +104,7 @@
         @endif
        @if($commentCount>$showCount)
        <div class="col-12 mt-4">
-         <a href=""
+         <a href="{{ route('post-details', $post->id) }}"
            class="text-decoration-none link-dark text-light py-2">
            <div class="container-fluid bg-primary text-center">
 
