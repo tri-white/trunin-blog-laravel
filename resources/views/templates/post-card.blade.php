@@ -49,26 +49,7 @@
                         @endif
                     @endif
 
-                    <p class="my-auto me-2"> {{ $post->likes}} </p>
-
-                    @if(!Auth::check())
-                    <a href="{{ route('login') }}" class="btn btn-outline-danger" id="like-button">
-                        <i class="fa fa-heart"></i>
-                    </a>
-                    @else
-                        <form method="POST" action="{{ route('like', [$post->id, Auth::user()->id]) }}">
-                            @csrf
-                            @if(Auth::check())
-                                <button type="submit" class="btn btn-outline-danger" id="like-button">
-                                    <i class="fa fa-heart"></i>
-                                </button>
-                            @else
-                                <button type="submit" class="btn btn-danger" id="like-button">
-                                    <i class="fa fa-heart"></i>
-                                </button>
-                            @endif
-                        </form>
-                    @endif
+                    @include('templates/like')
                 </div>
             </div>
         </div>

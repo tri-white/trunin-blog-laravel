@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Like;
-
+use App\Models\Post;
 class LikeController extends Controller
 {
     public function change(Request $request, $postid, $userid) {
@@ -12,7 +12,6 @@ class LikeController extends Controller
     
         if ($like) {
             $like->delete();
-    
             Post::where('id', $postid)->decrement('likes');
         } else {
             $liked = new Like();
