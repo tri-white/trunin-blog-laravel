@@ -47,7 +47,7 @@
                     @endif
                     @endif
                     @if(Auth::user()->id == $user->id || Auth::user()->admin == 1)
-                    <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editPostModal">
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editPostModal">
                         <i class="fa fa-pencil"></i>
                     </button>
                     @endif
@@ -56,73 +56,69 @@
         </div>
     </div>
 
+    <!-- POST COMMENTS -->
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            @php
+            $comms = $post->comms()->get();
+            $commentCount = $comms->count();
+            $counter= 0;
+            $showCount = 2;
+            @endphp
 
-<!-- POST COMMENTS -->
-<ul class="list-group list-group-flush">
-    <li class="list-group-item">
-        @php
-        $comms = $post->comms()->get();
-        $commentCount = $comms->count();
-        $counter= 0;
-        $showCount = 2;
-        @endphp
+            @if($commentCount > 0)
+            @foreach($comms as $comm)
+            @php
+            $row_user = \App\Models\User::find($comm->userid);
+            $counter = $counter+1;
+            @endphp
+            @if($counter>$showCount)
+            @break
+            @endif
+            @include('templates/comment-card')
 
-        @if($commentCount > 0)
-        @foreach($comms as $comm)
-        @php
-        $row_user = \App\Models\User::find($comm->userid);
-        $counter = $counter+1;
-        @endphp
-        @if($counter>$showCount)
-        @break
-        @endif
-        @include('templates/comment-card')
+            @endforeach
+            @else
+            <div class='my-2 text-muted col-lg-12 text-center fs-5'>
+                Немає комментарів.
+            </div>
+            @endif
+            @if($commentCount>$showCount)
+            <div class="col-12 mt-4">
+                <a href="{{ route('post-details', $post->id) }}" class="text-decoration-none link-dark text-light py-2">
+                    <div class="container-fluid bg-primary text-center">
 
-        @endforeach
-        @else
-        <div class='my-2 text-muted col-lg-12 text-center fs-5'>
-            Немає комментарів.
-        </div>
-        @endif
-        @if($commentCount>$showCount)
-        <div class="col-12 mt-4">
-            <a href="{{ route('post-details', $post->id) }}" class="text-decoration-none link-dark text-light py-2">
-                <div class="container-fluid bg-primary text-center">
+                        <p>
+                            Переглянути ще {{ $commentCount-$showCount }} комментарів
+                        </p>
 
-                    <p>
-                        Переглянути ще {{ $commentCount-$showCount }} комментарів
-                    </p>
+                    </div>
+                </a>
 
-                </div>
-            </a>
+            </div>
 
-        </div>
+            @endif
+        </li>
+    </ul>
 
-        @endif
-    </li>
-</ul>
+    <!-- END POST COMMENTS -->
 
-<!-- END POST COMMENTS -->
-
-<!-- YOUR COMMENT -->
-@if(Auth::check())
-<div class="card-body">
-    <form method="POST" action="{{ route('add-comment', ['userid' => Auth::user()->id, 'postid' => $post->id]) }}"
-        autocomplete="off">
-        @csrf
-        <div class="input-group align-items-center">
-            <input name="description" type="text" class="form-control" placeholder="Ваш коментар"
-                aria-label="Add a comment" aria-describedby="comment-button">
-            <button class="btn btn-primary" type="submit" id="comment-button">Додати коментар</button>
-        </div>
-    </form>
+    <!-- YOUR COMMENT -->
+    @if(Auth::check())
+    <div class="card-body">
+        <form method="POST" action="{{ route('add-comment', ['userid' => Auth::user()->id, 'postid' => $post->id]) }}"
+            autocomplete="off">
+            @csrf
+            <div class="input-group align-items-center">
+                <input name="description" type="text" class="form-control" placeholder="Ваш коментар"
+                    aria-label="Add a comment" aria-describedby="comment-button">
+                <button class="btn btn-primary" type="submit" id="comment-button">Додати коментар</button>
+            </div>
+        </form>
+    </div>
+    @endif
+    <!-- END YOUR COMMENT -->
 </div>
-@endif
-<!-- END YOUR COMMENT -->
-</div>
-</div>
-<!-- POST END -->
-
 <!-- Edit Post -->
 <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -150,3 +146,4 @@
         </div>
     </div>
 </div>
+<!-- POST END -->

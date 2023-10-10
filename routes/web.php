@@ -19,6 +19,8 @@ Route::get('/login', [UserController::class, 'loginView'])->name('loginView');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/profile/{userid}', [UserController::class, 'profile'])->name('profile');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::post('/profile/edit/{userid}', [UserController::class, 'editUser'])->name('edit-user');
+
 
 Route::post('/removeuser/{userid}', [AdminController::class, 'removeUser'])->name('remove-user');
 Route::post('/removepost/{postid}', [AdminController::class, 'removePost'])->name('remove-post');
