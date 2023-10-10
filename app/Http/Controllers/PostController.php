@@ -74,8 +74,12 @@ class PostController extends Controller
         }
     
         if ($cat !== 'all') {
-            if($cat=="Entertainment") $cat="Розваги";
-            $query->where('category', $cat);
+            if($cat=="null") {
+                $query->where('category',NULL);
+            }
+            else{
+                $query->where('category', $cat);
+            }
         }
     
         if ($sort === 'date-desc') {
