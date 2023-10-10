@@ -19,16 +19,13 @@
         <hr>
 
         <p>
-            <pre class="fs-4">
             {{ $post->title }}
-            </pre>
         </p>
         <hr>
-        <p class="d-flex justify-content-start p-0 m-0">
-            <pre class="d-flex justify-content-start m-0 p-0 fs-5">
-            {{ $post->description }}
-            </pre>
+        <p class="text-wrap">
+                {{ strlen($post->description) > 200 ? substr($post->description, 0, 200) . '...' : $post->description }}
         </p>
+
 
         <a href="{{ route('post-details',$post->id) }}" class="d-flex justify-content-end text-decoration-none">
             Детальніше...
