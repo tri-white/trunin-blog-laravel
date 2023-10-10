@@ -22,8 +22,8 @@ class PostController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'post-description' => 'required|string|max:255',
-            'post-category' => 'required|string|max:255',
+            'post-description' => 'required|string|max:1000',
+            'post-category' => 'required|string|max:30',
             'post-title' => 'required|string|max:50',
         ]);
         
