@@ -16,9 +16,12 @@
           <div class="col-lg-6 col-md-8 col-sm-12">
             <form method="post" action="{{ route('create-post') }}" enctype="multipart/form-data">
               @csrf
+              <div class="mb-3">
+                        <input type="text" name="post-title" class="form-control" placeholder="Заголовок поста">
+                    </div>
                 <textarea name="post-description" class="form-control" id="contentInput" rows="5"
                   placeholder="Що у вас нового?"></textarea>
-                <div class="row d-flex">
+                <div class="row d-flex justify-content-between">
                   <div class="col-lg-4 col-md-6 col-sm-12 mt-1">
                     <select name="post-category" class="form-select" aria-label="Категорія" style="width:100%;">
                       <option value="no">Без категорії</option>
@@ -26,11 +29,6 @@
                       <option value="Entertainment">Розваги</option>
                       <option value="LifeSport">Життя та спорт</option>
                     </select>
-                  </div>
-                  <div class="col-lg-4 col-md-6 col-sm-12 mt-1">
-                    <label for="inputField" class="btn btn-light border border-1 border-dark my-auto"
-                      style="width:100%;">Завантажити фото</label>
-                    <input name="post-image" type="file" id="inputField" style="display:none">
                   </div>
                   <div class="col-lg-4 col-md-12 col-sm-12 mt-1">
                     <button type="submit" class="btn btn-outline-primary" style="width:100%;">Опублікувати</button>
@@ -57,7 +55,7 @@
                   aria-label="Search" aria-describedby="search-addon" />
                 <button type="submit" class="btn btn-outline-dark">Знайти</button>
               </div>
-              <div class="d-flex justify-content-between mb-2 mt-2">
+              <div class="d-flex justify-content-around mb-2 mt-2">
                 <div class="col-lg-6">
                   <select id="post-category-filter" name="post-category-filter" class="form-select"
                     aria-label="Категорія" style="width:100%;">
@@ -76,6 +74,10 @@
                     <option value="comm-desc" {{ $sort == 'comm-desc' ? 'selected' : '' }}>По комментарям (↓)
                     </option>
                     <option value="comm-asc" {{ $sort == 'comm-asc' ? 'selected' : '' }}>По комментарям (↑)
+                    </option>
+                    <option value="like-desc" {{ $sort == 'like-desc' ? 'selected' : '' }}>По вподобайкам (↓)
+                    </option>
+                    <option value="like-asc" {{ $sort == 'like-asc' ? 'selected' : '' }}>По вподобайкам (↑)
                     </option>
                   </select>
                   </div>
@@ -96,7 +98,7 @@
                 @php
                     $user = \App\Models\User::find($post->userid);
                 @endphp
-                @include('templates/post-card');
+                @include('templates/post-card')
             @endforeach
           </div>
         </div>

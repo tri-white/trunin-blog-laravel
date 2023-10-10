@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->text('description');
-            $table->text('title');
             $table->unsignedBigInteger('userid');
-            $table->unsignedBigInteger('likes')->default(0);
-            $table->enum('category', ['Розваги', 'Життя та спорт', 'Освіта та наука'])->nullable();
-            $table->timestamps();
+            $table->unsignedBigInteger('postid');
+
             $table->foreign('userid')->references('id')->on('users');
+            $table->foreign('postid')->references('id')->on('posts');
+
+            $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('likes');
     }
 };

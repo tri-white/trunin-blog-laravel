@@ -20,7 +20,7 @@ class CommentController extends Controller
         $comment->description = $request->input('description');
         $comment->save();
 
-        return redirect()->route('welcome');
+        return redirect()->back();
     }
 
 }

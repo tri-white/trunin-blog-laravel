@@ -22,16 +22,13 @@ class PostController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'post-description' => 'nullable|string|max:255',
-            'post-category' => 'nullable|string|max:255',
-            'post-image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'post-description' => 'required|string|max:255',
+            'post-category' => 'required|string|max:255',
+            'post-title' => 'required|string|max:50',
         ]);
-
-        if (!$request->input('post-description') && !$request->hasFile('post-image')) {
-            return redirect()->route('welcome')->with('empty-post', 'Потрібно заповнити хоча б одне поле: Текст або Фото');
-        }
-
+        
         $post = new Post();
+        $post->title = $request->input('post-title');
         $post->description = $request->input('post-description');
         if($request->input('post-category') == "no"){
             $post->category=null;
@@ -46,11 +43,6 @@ class PostController extends Controller
             $post->category = "Життя та спорт";
         }
         $post->userid = Auth::user()->id;
-
-        if ($request->hasFile('post-image')) {
-            $imagePath = $request->file('post-image')->store('public/posts');
-            $post->photo = $imagePath;
-        }
 
         $post->save();
 
@@ -67,11 +59,17 @@ class PostController extends Controller
 
         return redirect()->view('welcome', compact('posts', 'key', 'cat', 'sort'));
     }
+
+    public function postDetails($postid){
+        $post = Post::where('id', $postid)->first();
+        return view('post')->with('post', $post);
+    }
+
     public function search($key, $cat, $sort)
     {
         $query = Post::query();
 
-        if ($key) {
+        if ($key != "") {
             $query->where('description', 'like', '%' . $key . '%');
         }
 
@@ -84,10 +82,15 @@ class PostController extends Controller
         } elseif ($sort === 'date-asc') {
             $query->orderBy('created_at');
         } elseif ($sort === 'comm-desc') {
-            // You can add sorting logic based on comments count here
         } elseif ($sort === 'comm-asc') {
-            // You can add sorting logic based on comments count here
+
+        } elseif ($sort === 'like-desc') {
+            $query->orderByDesc('likes');
+        } elseif ($sort === 'like-asc') {
+            $query->orderBy('likes');
+
         }
+        
 
         $posts = $query->get();
 
