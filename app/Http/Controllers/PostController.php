@@ -74,6 +74,7 @@ class PostController extends Controller
         }
     
         if ($cat !== 'all') {
+            if($cat=="Entertainment") $cat="Розваги";
             $query->where('category', $cat);
         }
     

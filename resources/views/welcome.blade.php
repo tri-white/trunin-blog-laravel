@@ -60,10 +60,10 @@
                   <select id="post-category-filter" name="post-category-filter" class="form-select"
                     aria-label="Категорія" style="width:100%;">
                       <option value="all" {{ $cat == 'all' ? 'selected' : '' }}>Всі категорії</option>
-                      <option value="no" {{ $cat == 'no' ? 'selected' : '' }}>Без категорії</option>
-                      <option value="StudyScience" {{ $cat == 'StudyScience' ? 'selected' : '' }}>Освіта та наука</option>
-                      <option value="Entertainment" {{ $cat == 'Entertainment' ? 'selected' : '' }}>Розваги</option>
-                      <option value="LifeSport" {{ $cat == 'LifeSport' ? 'selected' : '' }}>Життя та спорт</option>
+                      <option value="null" {{ $cat == 'null' ? 'selected' : '' }}>Без категорії</option>
+                      <option value="Освіта та наука" {{ $cat == 'Освіта та наука' ? 'selected' : '' }}>Освіта та наука</option>
+                      <option value="Розваги" {{ $cat == 'Розваги' ? 'selected' : '' }}>Розваги</option>
+                      <option value="Життя та спорт" {{ $cat == 'Життя та спорт' ? 'selected' : '' }}>Життя та спорт</option>
                   </select>
                 </div>
                 <div class="col-lg-6">
