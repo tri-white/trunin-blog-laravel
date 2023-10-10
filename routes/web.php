@@ -28,8 +28,11 @@ Route::get('/', [PostController::class, 'index'])->name('welcome');
 Route::get('/search', [PostController::class, 'searchAction'])->name('post-search');
 Route::post('/', [PostController::class, 'create'])->name('create-post');
 Route::get('/post/{postid}', [PostController::class, 'postDetails'])->name('post-details');
+Route::post('/post/edit/{postid}', [PostController::class, 'editPost'])->name('edit-post');
+
 
 Route::post('/comment/{userid}/{postid}', [CommentController::class, 'create'])->name('add-comment');
+Route::post('/comment/edit/{commentid}', [CommentController::class, 'editComment'])->name('edit-comment');
 
 Route::post('/like/{postid}/{userid}', [LikeController::class, 'change'])->name('like');
 

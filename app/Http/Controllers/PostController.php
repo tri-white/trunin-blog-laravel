@@ -97,5 +97,19 @@ class PostController extends Controller
         return $posts;
     }
     
+    public function editPost(Request $request, $postid)
+    {
+        $request->validate([
+            'editedTitle' => 'required|max:255',
+            'editedDescription' => 'required|max:1000',
+        ]);
 
+        $post = Post::find($postid);
+
+        $post->title = $request->input('editedTitle');
+        $post->description = $request->input('editedDescription');
+        $post->save();
+
+        return redirect()->back()->with('success','Пост було відредаговано');
+    }
 }
