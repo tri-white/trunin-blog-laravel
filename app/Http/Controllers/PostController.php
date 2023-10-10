@@ -77,7 +77,13 @@ class PostController extends Controller
             // You can add sorting logic based on comments count here
         } elseif ($sort === 'comm-asc') {
             // You can add sorting logic based on comments count here
+        } elseif ($sort === 'like-desc') {
+            $query->orderByDesc('likes');
+        } elseif ($sort === 'like-asc') {
+            $query->orderBy('likes');
+
         }
+        
 
         $posts = $query->get();
 
