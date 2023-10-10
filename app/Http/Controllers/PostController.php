@@ -61,7 +61,7 @@ class PostController extends Controller
     {
         $query = Post::query();
 
-        if ($key) {
+        if ($key != "") {
             $query->where('description', 'like', '%' . $key . '%');
         }
 
@@ -74,9 +74,8 @@ class PostController extends Controller
         } elseif ($sort === 'date-asc') {
             $query->orderBy('created_at');
         } elseif ($sort === 'comm-desc') {
-            // You can add sorting logic based on comments count here
         } elseif ($sort === 'comm-asc') {
-            // You can add sorting logic based on comments count here
+
         } elseif ($sort === 'like-desc') {
             $query->orderByDesc('likes');
         } elseif ($sort === 'like-asc') {

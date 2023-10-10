@@ -47,6 +47,26 @@
                             </form>
                         @endif
                     @endif
+
+                    <p class="my-auto me-2"> {{ $post->likes}} </p>
+
+                    @if(!Auth::check())
+                    <a href="{{ route('login') }}" class="btn btn-outline-danger" id="like-button">
+                        <i class="fa fa-heart"></i>
+                    </a>
+                    @else
+                        @if(Auth::check())
+                        <a href=""
+                            class="btn btn-outline-danger" id="like-button">
+                            <i class="fa fa-heart"></i>
+                        </a>
+                        @else
+                        <a href=""
+                            class="btn btn-danger" id="like-button">
+                            <i class="fa fa-heart"></i>
+                        </a>
+                        @endif
+                    @endif
                 </div>
             </div>
         </div>
