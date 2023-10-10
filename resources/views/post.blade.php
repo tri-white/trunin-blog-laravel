@@ -1,10 +1,8 @@
 @extends('shared/layout')
  
 @section('content')
-        @foreach($posts as $post)
             @php
-                $user = \App\Models\User::where('id', Auth::user()->id);
+                $user = \App\Models\User::where('id', $post->id)->first();
             @endphp
             @include('templates/post-card-details')
-        @endforeach
 @endsection

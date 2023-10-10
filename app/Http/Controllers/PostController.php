@@ -59,9 +59,12 @@ class PostController extends Controller
 
         return redirect()->view('welcome', compact('posts', 'key', 'cat', 'sort'));
     }
+
     public function postDetails($postid){
-        return redirect()->view('welcome');
+        $post = Post::where('id', $postid)->first();
+        return view('post')->with('post', $post);
     }
+
     public function search($key, $cat, $sort)
     {
         $query = Post::query();

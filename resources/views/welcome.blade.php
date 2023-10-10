@@ -98,7 +98,7 @@
                 @php
                     $user = \App\Models\User::find($post->userid);
                 @endphp
-                @include('templates/post-card');
+                @include('templates/post-card')
             @endforeach
           </div>
         </div>
