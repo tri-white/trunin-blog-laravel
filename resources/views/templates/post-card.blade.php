@@ -18,7 +18,7 @@
         </a>
         <hr>
 
-        <p>
+        <p class="text-wrap">
             {{ $post->title }}
         </p>
         <hr>
@@ -51,6 +51,7 @@
                         <i class="fa fa-pencil"></i>
                     </button>
                     @endif
+                    @include('templates/like')
                 </div>
             </div>
         </div>
@@ -118,9 +119,7 @@
     </div>
     @endif
     <!-- END YOUR COMMENT -->
-</div>
-<!-- Edit Post -->
-<div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -146,4 +145,7 @@
         </div>
     </div>
 </div>
+</div>
+<!-- Edit Post -->
+
 <!-- POST END -->

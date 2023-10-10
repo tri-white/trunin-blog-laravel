@@ -104,7 +104,7 @@ class PostController extends Controller
             'editedDescription' => 'required|max:1000',
         ]);
 
-        $post = Post::find($postid);
+        $post = Post::where('id',$postid)->first();
 
         $post->title = $request->input('editedTitle');
         $post->description = $request->input('editedDescription');

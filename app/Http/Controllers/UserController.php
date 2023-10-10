@@ -72,7 +72,7 @@ class UserController extends Controller
             'editedLogin' => 'required|max:255|unique:users,login,' . $userid,
         ]);
 
-        $user = User::find($userid);
+        $user = User::where('id',$userid)->first();
 
         $user->login = $request->input('editedLogin');
         $user->save();

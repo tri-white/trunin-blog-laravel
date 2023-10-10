@@ -29,7 +29,7 @@ class CommentController extends Controller
             'editedComment' => 'required|string|max:1000',
         ]);
 
-        $comment = Comment::find($commentid);
+        $comment = Comment::where('id',$commentid);
 
         $comment->description = $request->input('editedComment');
         $comment->save();

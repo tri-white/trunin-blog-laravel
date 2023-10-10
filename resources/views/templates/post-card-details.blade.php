@@ -17,25 +17,13 @@
             </div>
         </a>
         <hr>
-        <p>
-                <pre class="fs-4">
+        <p class="text-wrap">
                     {{ $post->title }}
-                </pre>
             </p>
             <hr>
-            <p>
-                <pre class="fs-5">
+            <p class="text-wrap">
                     {{ $post->description }}
-                </pre>
             </p>
-            @if ($post->photo)
-                <img src="{{ asset('storage/' . $post->photo) }}" alt="Post Image"
-                    class="card-img-top border border-1 border-dark">
-            @endif
-        <a href=""
-            class="text-decoration-none link-dark">
-            
-        </a>
         <div class="d-flex justify-content-between mt-2 align-items-center">
             <div class="col-lg-6">
                 <p class="my-auto me-2 text-muted">{{ $post->category }}</p>
@@ -52,7 +40,11 @@
                             </form>
                         @endif
                     @endif
-
+                    @if(Auth::user()->id == $user->id || Auth::user()->admin == 1)
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editPostModal">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    @endif
                     @include('templates/like')
                 </div>
             </div>
@@ -100,5 +92,31 @@
    </div>
     @endif
     <!-- END YOUR COMMENT -->
+    <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editPostModalLabel">Редагування посту</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('edit-post', ['postid'=>$post->id]) }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="editedTitle">Редагування заголовку поста:</label>
+                        <input type="text" class="form-control" id="editedTitle" name="editedTitle"
+                            value="{{ $post->title }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editedDescription">Редагування опису поста:</label>
+                        <textarea class="form-control" id="editedDescription" name="editedDescription"
+                            rows="4">{{ $post->description }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 <!-- POST END -->
