@@ -22,15 +22,10 @@ class PostController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'post-description' => 'nullable|string|max:255',
-            'post-category' => 'nullable|string|max:255',
-            'post-image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'post-description' => 'required|string|max:255',
+            'post-category' => 'required|string|max:255',
         ]);
-
-        if (!$request->input('post-description') && !$request->hasFile('post-image')) {
-            return redirect()->route('welcome')->with('empty-post', 'Потрібно заповнити хоча б одне поле: Текст або Фото');
-        }
-
+        
         $post = new Post();
         $post->description = $request->input('post-description');
         if($request->input('post-category') == "no"){
@@ -46,11 +41,6 @@ class PostController extends Controller
             $post->category = "Життя та спорт";
         }
         $post->userid = Auth::user()->id;
-
-        if ($request->hasFile('post-image')) {
-            $imagePath = $request->file('post-image')->store('public/posts');
-            $post->photo = $imagePath;
-        }
 
         $post->save();
 
