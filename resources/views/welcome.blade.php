@@ -72,6 +72,10 @@
                     </option>
                     <option value="comm-asc" {{ $sort == 'comm-asc' ? 'selected' : '' }}>По комментарям (↑)
                     </option>
+                    <option value="like-desc" {{ $sort == 'like-desc' ? 'selected' : '' }}>По вподобайкам (↓)
+                    </option>
+                    <option value="like-asc" {{ $sort == 'like-asc' ? 'selected' : '' }}>По вподобайкам (↑)
+                    </option>
                   </select>
                   </div>
                 </div>

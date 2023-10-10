@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('userid');
+            $table->unsignedBigInteger('likes');
             $table->enum('category', ['Розваги', 'Життя та спорт', 'Освіта та наука'])->nullable();
             $table->timestamps();
             $table->foreign('userid')->references('id')->on('users');
