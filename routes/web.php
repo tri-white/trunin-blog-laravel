@@ -31,6 +31,7 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/', [PostController::class, 'index'])->name('welcome');
 Route::get('/search', [PostController::class, 'searchAction'])->name('post-search');
 Route::post('/', [PostController::class, 'create'])->name('create-post');
+Route::get('/post/{postid}', [PostController::class, 'postDetails'])->name('post-details');
 
 Route::post('/comment/{userid}/{postid}', [CommentController::class, 'create'])->name('add-comment');
 

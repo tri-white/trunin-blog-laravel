@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->text('description')->nullable();
+            $table->text('description');
+            $table->text('title');
             $table->unsignedBigInteger('userid');
             $table->unsignedBigInteger('likes')->default(0);
             $table->enum('category', ['Розваги', 'Життя та спорт', 'Освіта та наука'])->nullable();

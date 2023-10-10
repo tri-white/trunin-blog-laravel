@@ -24,9 +24,11 @@ class PostController extends Controller
         $request->validate([
             'post-description' => 'required|string|max:255',
             'post-category' => 'required|string|max:255',
+            'post-title' => 'required|string|max:50',
         ]);
         
         $post = new Post();
+        $post->title = $request->input('post-title');
         $post->description = $request->input('post-description');
         if($request->input('post-category') == "no"){
             $post->category=null;
@@ -56,6 +58,9 @@ class PostController extends Controller
         $posts = $this->search($key,$cat,$sort);
 
         return redirect()->view('welcome', compact('posts', 'key', 'cat', 'sort'));
+    }
+    public function postDetails($postid){
+        return redirect()->view('welcome');
     }
     public function search($key, $cat, $sort)
     {

@@ -16,9 +16,12 @@
           <div class="col-lg-6 col-md-8 col-sm-12">
             <form method="post" action="{{ route('create-post') }}" enctype="multipart/form-data">
               @csrf
+              <div class="mb-3">
+                        <input type="text" name="post-title" class="form-control" placeholder="Заголовок поста">
+                    </div>
                 <textarea name="post-description" class="form-control" id="contentInput" rows="5"
                   placeholder="Що у вас нового?"></textarea>
-                <div class="row d-flex justify-content-around">
+                <div class="row d-flex justify-content-between">
                   <div class="col-lg-4 col-md-6 col-sm-12 mt-1">
                     <select name="post-category" class="form-select" aria-label="Категорія" style="width:100%;">
                       <option value="no">Без категорії</option>
@@ -52,7 +55,7 @@
                   aria-label="Search" aria-describedby="search-addon" />
                 <button type="submit" class="btn btn-outline-dark">Знайти</button>
               </div>
-              <div class="d-flex justify-content-between mb-2 mt-2">
+              <div class="d-flex justify-content-around mb-2 mt-2">
                 <div class="col-lg-6">
                   <select id="post-category-filter" name="post-category-filter" class="form-select"
                     aria-label="Категорія" style="width:100%;">

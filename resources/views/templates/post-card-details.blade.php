@@ -17,10 +17,7 @@
             </div>
         </a>
         <hr>
-        
-        <a href="{{ route('post-details',$post->id) }}"
-            class="text-decoration-none link-dark">
-            <p>
+        <p>
                 <pre class="fs-4">
                     {{ $post->title }}
                 </pre>
@@ -31,6 +28,13 @@
                     {{ $post->description }}
                 </pre>
             </p>
+            @if ($post->photo)
+                <img src="{{ asset('storage/' . $post->photo) }}" alt="Post Image"
+                    class="card-img-top border border-1 border-dark">
+            @endif
+        <a href=""
+            class="text-decoration-none link-dark">
+            
         </a>
         <div class="d-flex justify-content-between mt-2 align-items-center">
             <div class="col-lg-6">
@@ -101,22 +105,6 @@
                 Немає комментарів.
             </div>
         @endif
-       @if($commentCount>$showCount)
-       <div class="col-12 mt-4">
-         <a href=""
-           class="text-decoration-none link-dark text-light py-2">
-           <div class="container-fluid bg-primary text-center">
-
-             <p>
-             Переглянути ще {{ $commentCount-$showCount }} комментарів
-             </p>
-
-           </div>
-         </a>
-
-       </div>
-
-       @endif
      </li>
    </ul>
    <!-- END POST COMMENTS -->
