@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 class PostController extends Controller
 {
     public function index()
     {
-        $sort = "date-asc";
+        $sort = "date-desc";
         $key = "";
         $cat = "all";
         $posts = $this->search($key,$cat,$sort);
@@ -57,7 +57,7 @@ class PostController extends Controller
 
         $posts = $this->search($key,$cat,$sort);
 
-        return redirect()->view('welcome', compact('posts', 'key', 'cat', 'sort'));
+        return view('welcome', compact('posts', 'key', 'cat', 'sort'));
     }
 
     public function postDetails($postid){
@@ -68,33 +68,29 @@ class PostController extends Controller
     public function search($key, $cat, $sort)
     {
         $query = Post::query();
-
+    
         if ($key != "") {
             $query->where('description', 'like', '%' . $key . '%');
         }
-
+    
         if ($cat !== 'all') {
             $query->where('category', $cat);
         }
-
+    
         if ($sort === 'date-desc') {
             $query->orderByDesc('created_at');
         } elseif ($sort === 'date-asc') {
             $query->orderBy('created_at');
-        } elseif ($sort === 'comm-desc') {
-        } elseif ($sort === 'comm-asc') {
-
-        } elseif ($sort === 'like-desc') {
+        }elseif ($sort === 'like-desc') {
             $query->orderByDesc('likes');
         } elseif ($sort === 'like-asc') {
             $query->orderBy('likes');
-
         }
-        
-
+    
         $posts = $query->get();
-
+    
         return $posts;
     }
+    
 
 }

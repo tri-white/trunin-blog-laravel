@@ -49,7 +49,7 @@
         
         <div class="row d-flex justify-content-center">
           <div class="col-lg-8 col-md-10 col-sm-12 text-center">
-            <form method="post" action="{{ route('post-search') }}">
+            <form method="get" action="{{ route('post-search') }}">
               <div class="input-group">
                 <input value="{{ $key }}" name="search-input-key" type="search" class="px-3 form-control" placeholder="Пошук..."
                   aria-label="Search" aria-describedby="search-addon" />
@@ -71,10 +71,6 @@
                     style="width:100%;">
                     <option value="date-desc"  {{ $sort == 'date-desc' ? 'selected' : '' }}>По даті (↓)</option>
                     <option value="date-asc" {{ $sort == 'date-asc' ? 'selected' : '' }}>По даті (↑)</option>
-                    <option value="comm-desc" {{ $sort == 'comm-desc' ? 'selected' : '' }}>По комментарям (↓)
-                    </option>
-                    <option value="comm-asc" {{ $sort == 'comm-asc' ? 'selected' : '' }}>По комментарям (↑)
-                    </option>
                     <option value="like-desc" {{ $sort == 'like-desc' ? 'selected' : '' }}>По вподобайкам (↓)
                     </option>
                     <option value="like-asc" {{ $sort == 'like-asc' ? 'selected' : '' }}>По вподобайкам (↑)

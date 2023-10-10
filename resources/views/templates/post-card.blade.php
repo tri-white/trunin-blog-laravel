@@ -17,21 +17,23 @@
             </div>
         </a>
         <hr>
-        
-        <a href="{{ route('post-details',$post->id) }}"
-            class="text-decoration-none link-dark">
-            <p>
-                <pre class="fs-4">
-                    {{ $post->title }}
-                </pre>
-            </p>
-            <hr>
-            <p>
-                <pre class="fs-5">
-                    {{ $post->description }}
-                </pre>
-            </p>
+
+        <p>
+            <pre class="fs-4">
+            {{ $post->title }}
+            </pre>
+        </p>
+        <hr>
+        <p class="d-flex justify-content-start p-0 m-0">
+            <pre class="d-flex justify-content-start m-0 p-0 fs-5">
+            {{ $post->description }}
+            </pre>
+        </p>
+
+        <a href="{{ route('post-details',$post->id) }}" class="d-flex justify-content-end text-decoration-none">
+            Детальніше...
         </a>
+
         <div class="d-flex justify-content-between mt-2 align-items-center">
             <div class="col-lg-6">
                 <p class="my-auto me-2 text-muted">{{ $post->category }}</p>
@@ -39,83 +41,82 @@
             <div class="col-lg-6">
                 <div class="d-flex justify-content-end">
                     @if(Auth::check())
-                        @if (Auth::user()->admin == 1 || Auth::user()->id == $user->id)
-                            <form method="POST" action="{{ route('remove-post', ['postid'=>$post->id]) }}">
-                                @csrf
-                                <button type="submit" style="border: none; background: none; cursor: pointer;">
-                                    <i class="fa fa-trash-can"></i>
-                                </button>
-                            </form>
-                        @endif
+                    @if (Auth::user()->admin == 1 || Auth::user()->id == $user->id)
+                    <form method="POST" action="{{ route('remove-post', ['postid'=>$post->id]) }}">
+                        @csrf
+                        <button type="submit" style="border: none; background: none; cursor: pointer;">
+                            <i class="fa fa-trash-can"></i>
+                        </button>
+                    </form>
+                    @endif
                     @endif
 
                     @include('templates/like')
                 </div>
             </div>
         </div>
-      
+
     </div>
 
     <!-- POST COMMENTS -->
-   <ul class="list-group list-group-flush">
-     <li class="list-group-item">
-        @php
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            @php
             $comms = $post->comms()->get();
             $commentCount = $comms->count();
             $counter= 0;
             $showCount = 2;
-        @endphp
+            @endphp
 
-        @if($commentCount > 0)
+            @if($commentCount > 0)
             @foreach($comms as $comm)
-                @php
-                    $row_user = \App\Models\User::find($comm->userid);
-                    $counter = $counter+1;
-                @endphp
-                @if($counter>$showCount)
-                    @break
-                @endif
-                @include('templates/comment-card')
-                
+            @php
+            $row_user = \App\Models\User::find($comm->userid);
+            $counter = $counter+1;
+            @endphp
+            @if($counter>$showCount)
+            @break
+            @endif
+            @include('templates/comment-card')
+
             @endforeach
-        @else
+            @else
             <div class='my-2 text-muted col-lg-12 text-center fs-5'>
                 Немає комментарів.
             </div>
-        @endif
-       @if($commentCount>$showCount)
-       <div class="col-12 mt-4">
-         <a href="{{ route('post-details', $post->id) }}"
-           class="text-decoration-none link-dark text-light py-2">
-           <div class="container-fluid bg-primary text-center">
+            @endif
+            @if($commentCount>$showCount)
+            <div class="col-12 mt-4">
+                <a href="{{ route('post-details', $post->id) }}" class="text-decoration-none link-dark text-light py-2">
+                    <div class="container-fluid bg-primary text-center">
 
-             <p>
-             Переглянути ще {{ $commentCount-$showCount }} комментарів
-             </p>
+                        <p>
+                            Переглянути ще {{ $commentCount-$showCount }} комментарів
+                        </p>
 
-           </div>
-         </a>
+                    </div>
+                </a>
 
-       </div>
+            </div>
 
-       @endif
-     </li>
-   </ul>
-   <!-- END POST COMMENTS -->
+            @endif
+        </li>
+    </ul>
+    <!-- END POST COMMENTS -->
 
-
-   <!-- YOUR COMMENT -->
+    <!-- YOUR COMMENT -->
     @if(Auth::check())
-   <div class="card-body">
-     <form method="POST" action="{{ route('add-comment', ['userid' => Auth::user()->id, 'postid' => $post->id]) }}" autocomplete="off">
-        @csrf
-       <div class="input-group align-items-center">
-         <input name="description" type="text" class="form-control" placeholder="Ваш коментар"
-           aria-label="Add a comment" aria-describedby="comment-button">
-         <button class="btn btn-primary" type="submit" id="comment-button">Додати коментар</button>
-       </div>
-     </form>
-   </div>
+    <div class="card-body">
+        <form method="POST" action="{{ route('add-comment', ['userid' => Auth::user()->id, 'postid' => $post->id]) }}"
+            autocomplete="off">
+            @csrf
+            <div class="input-group align-items-center">
+                <input name="description" type="text" class="form-control" placeholder="Ваш коментар"
+                    aria-label="Add a comment" aria-describedby="comment-button">
+                <button class="btn btn-primary" type="submit" id="comment-button">Додати коментар</button>
+            </div>
+        </form>
+    </div>
     @endif
     <!-- END YOUR COMMENT -->
 </div>
