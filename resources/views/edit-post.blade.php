@@ -7,14 +7,14 @@
                 <form method="post" action="{{ route('update-post', ['postid' => $post->id]) }}">
                     @csrf
                     <div class="mb-3">
-                        <label for="editedTitle">Edit Post Title:</label>
+                        <label for="editedTitle">Редагування заголовку:</label>
                         <input type="text" class="form-control" id="editedTitle" name="editedTitle" value="{{ $post->title }}">
                     </div>
                     <div class="mb-3">
-                        <label for="editedDescription">Edit Post Description:</label>
+                        <label for="editedDescription">Редагування опису:</label>
                         <textarea class="form-control" id="editedDescription" name="editedDescription" rows="4">{{ $post->description }}</textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" class="btn btn-primary">Зберегти зміни</button>
                 </form>
             </div>
         </div>

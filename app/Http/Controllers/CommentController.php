@@ -21,19 +21,21 @@ class CommentController extends Controller
 
         return redirect()->back();
     }
-
-    public function editComment(Request $request, $commentid)
-    {
-        \Log::info("TEST");
+    public function edit($commentid) {
+        $comment = Comment::find($commentid);
+    
+        return view('edit-comment', ['comment' => $comment]);
+    }
+    public function update(Request $request, $commentid) {
         $request->validate([
             'editedComment' => 'required|string|max:1000',
         ]);
-
-        $comment = Comment::where('id',$commentid);
+        $comment = Comment::find($commentid);
 
         $comment->description = $request->input('editedComment');
         $comment->save();
-
-        return redirect()->back()->with('success', 'Коментар було відредаговано');
+    
+        return redirect()->route('welcome')->with('success', 'Коментар було відредаговано');
     }
+    
 }

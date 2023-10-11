@@ -36,7 +36,8 @@ Route::post('/update-post/{postid}', [PostController::class, 'update'])->name('u
 
 
 Route::post('/comment/{userid}/{postid}', [CommentController::class, 'create'])->name('add-comment');
-Route::post('/comment/edit/{commentid}', [CommentController::class, 'editComment'])->name('edit-comment');
+Route::get('/edit-comment/{commentid}', [CommentController::class, 'edit'])->name('edit-comment');
+Route::post('/update-comment/{commentid}', [CommentController::class, 'update'])->name('update-comment');
 
 Route::post('/like/{postid}/{userid}', [LikeController::class, 'change'])->name('like');
 

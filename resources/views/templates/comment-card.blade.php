@@ -24,11 +24,11 @@
                 </button>
             </form>
             @endif
-            @if(Auth::user()->id == $row_user->id || Auth::user()->admin == 1)
-            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editCommentModal">
-                <i class="fa fa-pencil"></i>
-            </button>
-            @endif
+                @if(Auth::user()->id == $row_user->id || Auth::user()->admin == 1)
+                    <a href="{{ route('edit-comment', ['commentid' => $comm->id]) }}">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                @endif
             @endif
              <!-- Comment Edit -->
         <div class="modal fade" id="editCommentModal" tabindex="-1" aria-labelledby="editCommentModalLabel"

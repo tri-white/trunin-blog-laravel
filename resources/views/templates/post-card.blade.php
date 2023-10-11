@@ -49,10 +49,9 @@ $user = \App\Models\User::find($post->userid);
                     </form>
                     @endif
                     @if(Auth::user()->id == $user->id || Auth::user()->admin == 1)
-                    <a href="{{ route('edit-post', ['postid' => $post->id]) }}" class="btn btn-primary">
-                        <i class="fa fa-pencil"></i> Редагувати
+                    <a href="{{ route('edit-post', ['postid' => $post->id]) }}">
+                        <i class="fa fa-pencil"></i>
                     </a>
-
                     @endif
                     @endif
 
