@@ -9,7 +9,6 @@ class CommentController extends Controller
 {
     public function create(Request $request, $userid, $postid)
     {
-        \Log::info("HI world");
         $request->validate([
             'description' => 'required|string|max:255',
         ]);
@@ -22,5 +21,21 @@ class CommentController extends Controller
 
         return redirect()->back();
     }
+    public function edit($commentid) {
+        $comment = Comment::find($commentid);
+    
+        return view('edit-comment', ['comment' => $comment]);
+    }
+    public function update(Request $request, $commentid) {
+        $request->validate([
+            'editedComment' => 'required|string|max:1000',
+        ]);
+        $comment = Comment::find($commentid);
 
+        $comment->description = $request->input('editedComment');
+        $comment->save();
+    
+        return redirect()->route('welcome')->with('success', 'Коментар було відредаговано');
+    }
+    
 }

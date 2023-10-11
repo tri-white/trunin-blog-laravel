@@ -65,4 +65,18 @@ class UserController extends Controller
 
         return redirect()->route('login')->with('success', 'Регістрація успішна. Тепер авторизуйтесь');
     }
+
+    public function editUser(Request $request, $userid)
+    {
+        $request->validate([
+            'editedLogin' => 'required|max:255|unique:users,login,' . $userid,
+        ]);
+
+        $user = User::where('id',$userid)->first();
+
+        $user->login = $request->input('editedLogin');
+        $user->save();
+
+        return redirect()->back()->with('success', 'Успішно змінено логін');
+    }
 }

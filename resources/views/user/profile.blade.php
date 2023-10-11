@@ -1,6 +1,9 @@
 @extends('shared/layout')
 
 @section('content')
+@if(session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-12">
@@ -20,10 +23,16 @@
                             <i class="fa fa-trash-can"></i>
                         </button>
                     </form>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                        <i class="fa fa-pencil"></i>
+                    </button>
                 @endif
+
                 @endif
+
             </div>
         </div>
+        
     </div>
 
     <div class="row">
@@ -39,6 +48,28 @@
                         @endforeach
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit User Login -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalLabel">Редагування логіну користувача</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('edit-user', ['userid'=>$user->id]) }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="editedLogin">Відредагувати логін користувача:</label>
+                        <input type="text" class="form-control" id="editedLogin" name="editedLogin" value="{{ $user->login }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+                </form>
             </div>
         </div>
     </div>

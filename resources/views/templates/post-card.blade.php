@@ -1,5 +1,8 @@
 <!-- POST -->
-<div class="card mb-5">
+@php
+$user = \App\Models\User::find($post->userid);
+@endphp
+<div class="card mb-5 shadow-lg">
     <div class="card-body">
         <a href="{{ route('profile', $user->id) }}" class="text-decoration-none link-dark">
             <div class="d-flex">
@@ -18,14 +21,13 @@
         </a>
         <hr>
 
-        <p>
+        <p class="text-wrap fs-3 text-center">
             {{ $post->title }}
         </p>
         <hr>
-        <p class="text-wrap">
-                {{ strlen($post->description) > 200 ? substr($post->description, 0, 200) . '...' : $post->description }}
+        <p class="text-wrap fs-5">
+            {{ strlen($post->description) > 200 ? substr($post->description, 0, 200) . '...' : $post->description }}
         </p>
-
 
         <a href="{{ route('post-details',$post->id) }}" class="d-flex justify-content-end text-decoration-none">
             Детальніше...
@@ -46,13 +48,18 @@
                         </button>
                     </form>
                     @endif
+                    @if(Auth::user()->id == $user->id || Auth::user()->admin == 1)
+                    <a href="{{ route('edit-post', ['postid' => $post->id]) }}">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                    @endif
                     @endif
 
                     @include('templates/like')
+                    
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- POST COMMENTS -->
@@ -99,6 +106,7 @@
             @endif
         </li>
     </ul>
+
     <!-- END POST COMMENTS -->
 
     <!-- YOUR COMMENT -->
@@ -116,5 +124,9 @@
     </div>
     @endif
     <!-- END YOUR COMMENT -->
+    
+    
 </div>
+<!-- Edit Post -->
+
 <!-- POST END -->
