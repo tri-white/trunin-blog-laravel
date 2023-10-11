@@ -5,16 +5,23 @@
     <div class="container mt-5">
         <div class="col-12">
             <h1 class="my-4 text-center">Про сайт</h1>
-            <p>Ласкаво просимо до нашого блогу! Тут ви знайдете безліч цікавих інформаційних статей, захоплюючих роздумів та відкриттів. Наш блог - це простір для надання цінних знань та натхнення.</p>
-            <p>Ми присвячуємо себе поширенню інформації з різних сфер життя. Ви знайдете статті про технології, науку, мистецтво, музику, спорт, культуру, подорожі та багато іншого. Наші автори - це експерти з різних галузей, які діляться своїм досвідом, враженнями та цікавими перспективами.</p>
-            <p>Наша мета - не лише надати вам нові знання, але й надихнути вас досліджувати світ, розширювати горизонти та реалізовувати свій потенціал. Ми віримо, що кожна ідея, кожен відкриття та кожне враження можуть змінити світ.</p>
+            <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel, libero! Amet alias consequatur voluptatem id delectus harum ipsa numquam fuga vel, incidunt expedita soluta, repudiandae velit odit eius earum obcaecati.
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea praesentium labore officia consequuntur excepturi consectetur error deleniti quas rerum qui assumenda perspiciatis sit pariatur deserunt laudantium voluptates, libero porro esse.
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Temporibus, ab aspernatur quam, consequuntur nesciunt a, voluptatum unde consequatur repudiandae eaque nostrum iusto? Exercitationem totam obcaecati voluptatum iure, modi excepturi explicabo?
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo aut impedit, eligendi provident mollitia quas quia aspernatur? Minima, debitis. Ea tempora est officiis cupiditate magni rem necessitatibus minima enim quis.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum nihil voluptatem, alias ut debitis nisi eos accusamus, sit nam eveniet sunt totam consequuntur quibusdam laboriosam est commodi placeat. Rerum, necessitatibus.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore provident laboriosam blanditiis accusamus vitae dolorem inventore placeat soluta consectetur incidunt. Sapiente, exercitationem nisi. Optio, neque? Deserunt labore eius quibusdam saepe.
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, dicta beatae iste eius facere sunt optio quos quo rem non praesentium possimus facilis in quidem. Quas accusantium perspiciatis repudiandae necessitatibus.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Est ea perspiciatis perferendis minus magnam, eum recusandae quisquam atque fuga eaque iure velit, provident itaque. Necessitatibus iste officia magnam tenetur eum.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quos facere dicta sit, explicabo laudantium ex doloremque distinctio quis eos velit voluptatem vero numquam porro. Expedita architecto nostrum officia molestias!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam optio sunt reiciendis. Molestiae, deserunt in dolorem veritatis et officia laborum blanditiis sunt unde quidem perspiciatis ipsa fugit quaerat, qui ducimus!
+            </p>
             <h3 class="my-4">
                 Історія сайту
             </h3>
-            <p>Наш блог, Trunin Blog, був запущений у 2015 році з метою створення простору для вільного обміну думками, ідеями та знаннями. З самого початку нашою метою було надати людям платформу, де вони можуть ділитися своїми історіями, дослідженнями, цікавими відкриттями та іншими цікавими матеріалами.</p>
-            <p>Протягом років наш блог став популярним призначенням для всіх, хто бажає отримати нові знання та взаємодіяти зі спільнотою. Ми пишемо про широкий спектр тем, включаючи технології, науку, мистецтво, подорожі, культуру та багато іншого. Наші автори - це експерти у своїх галузях, які діляться своїм досвідом, інсайтами та цікавими перспективами.</p>
-            <p>Зараз Insanity Blog є динамічним та розширюється блогом з активною спільнотою читачів та авторів. Ми надаємо можливість кожному, хто має щось цікаве для поділу, публікувати свої статті та отримувати відгуки та обговорення від наших читачів.</p>
-        </div>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam fuga voluptatum, reiciendis omnis ea at adipisci optio voluptatem nemo velit molestias cumque soluta nobis facere beatae quae cupiditate non voluptatibus!
+</p>
+            </div>
     </div>
   </main>
  

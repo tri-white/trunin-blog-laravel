@@ -70,7 +70,7 @@ class PostController extends Controller
         $query = Post::query();
     
         if ($key != "") {
-            $query->where('description', 'like', '%' . $key . '%');
+            $query->where('description', 'like', '%' . $key . '%')->orWhere('title','like','%'.$key.'%');
         }
     
         if ($cat !== 'all') {
