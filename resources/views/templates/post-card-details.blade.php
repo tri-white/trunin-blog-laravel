@@ -43,12 +43,13 @@
                                 </button>
                             </form>
                         @endif
-                    @endif
-                    @if(Auth::user()->id == $user->id || Auth::user()->admin == 1)
+                        @if(Auth::user()->id == $user->id || Auth::user()->admin == 1)
                         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editPostModal">
                             <i class="fa fa-pencil"></i>
                         </button>
                     @endif
+                    @endif
+                    
                     @include('templates/like')
                 </div>
             </div>
