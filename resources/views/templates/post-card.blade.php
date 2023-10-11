@@ -1,5 +1,8 @@
 <!-- POST -->
-<div class="card mb-5">
+@php
+$user = \App\Models\User::find($post->userid);
+@endphp
+<div class="card mb-5 shadow-lg">
     <div class="card-body">
         <a href="{{ route('profile', $user->id) }}" class="text-decoration-none link-dark">
             <div class="d-flex">
@@ -18,11 +21,11 @@
         </a>
         <hr>
 
-        <p class="text-wrap">
+        <p class="text-wrap fs-3 text-center">
             {{ $post->title }}
         </p>
         <hr>
-        <p class="text-wrap">
+        <p class="text-wrap fs-5">
             {{ strlen($post->description) > 200 ? substr($post->description, 0, 200) . '...' : $post->description }}
         </p>
 
@@ -45,13 +48,16 @@
                         </button>
                     </form>
                     @endif
-                    @endif
                     @if(Auth::user()->id == $user->id || Auth::user()->admin == 1)
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editPostModal">
-                        <i class="fa fa-pencil"></i>
-                    </button>
+                    <a href="{{ route('edit-post', ['postid' => $post->id]) }}" class="btn btn-primary">
+                        <i class="fa fa-pencil"></i> Редагувати
+                    </a>
+
                     @endif
+                    @endif
+
                     @include('templates/like')
+                    
                 </div>
             </div>
         </div>
@@ -119,32 +125,8 @@
     </div>
     @endif
     <!-- END YOUR COMMENT -->
-    <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editPostModalLabel">Редагування посту</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="{{ route('edit-post', ['postid'=>$post->id]) }}">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="editedTitle">Редагування заголовку поста:</label>
-                        <input type="text" class="form-control" id="editedTitle" name="editedTitle"
-                            value="{{ $post->title }}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editedDescription">Редагування опису поста:</label>
-                        <textarea class="form-control" id="editedDescription" name="editedDescription"
-                            rows="4">{{ $post->description }}</textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Зберегти зміни</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+    
+    
 </div>
 <!-- Edit Post -->
 

@@ -30,7 +30,9 @@ Route::get('/', [PostController::class, 'index'])->name('welcome');
 Route::get('/search', [PostController::class, 'searchAction'])->name('post-search');
 Route::post('/', [PostController::class, 'create'])->name('create-post');
 Route::get('/post/{postid}', [PostController::class, 'postDetails'])->name('post-details');
-Route::post('/post/edit/{postid}', [PostController::class, 'editPost'])->name('edit-post');
+Route::get('/edit-post/{postid}', [PostController::class, 'edit'])->name('edit-post');
+Route::post('/update-post/{postid}', [PostController::class, 'update'])->name('update-post');
+
 
 
 Route::post('/comment/{userid}/{postid}', [CommentController::class, 'create'])->name('add-comment');

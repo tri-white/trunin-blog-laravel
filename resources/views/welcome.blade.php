@@ -91,9 +91,7 @@
           <div class="col-lg-8 col-md-10 col-sm-12">
 
             @foreach($posts as $post)
-                @php
-                    $user = \App\Models\User::find($post->userid);
-                @endphp
+
                 @include('templates/post-card')
             @endforeach
           </div>

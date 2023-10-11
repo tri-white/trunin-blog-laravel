@@ -1,8 +1,11 @@
 <!-- POST -->
-<div class="card mb-5 col-6 mx-auto px-auto mt-5">
+@php
+                $user = \App\Models\User::where('id', $post->userid)->first();
+            @endphp
+<div class="card mb-5 col-6 mx-auto px-auto mt-5 shadow">
     <div class="card-body">
         <a href="{{ route('profile', $user->id) }}" class="text-decoration-none link-dark">
-            <div class="d-flex">
+            <div class="d-flex align-items-center">
                 <div class="img-container" style="height:50px; width:50px;">
                     <img src="{{ $user->photo ? $user->photo : asset('images/user_male.jpg') }}"
                         style="width:100%; height:100%; object-fit: contain;"
@@ -17,19 +20,20 @@
             </div>
         </a>
         <hr>
-        <p class="text-wrap">
-                    {{ $post->title }}
-            </p>
-            <hr>
-            <p class="text-wrap">
-                    {{ $post->description }}
-            </p>
-        <div class="d-flex justify-content-between mt-2 align-items-center">
-            <div class="col-lg-6">
+        <p class="text-wrap fs-3 text-center">
+            {{ $post->title }}
+        </p>
+        <hr>
+        <p class="text-wrap fs-5">
+            {{ $post->description }}
+        </p>
+
+        <div class="d-flex justify-content-between align-items-center py-auto mt-2">
+            <div class="col-lg-6 py-auto">
                 <p class="my-auto me-2 text-muted">{{ $post->category }}</p>
             </div>
-            <div class="col-lg-6">
-                <div class="d-flex justify-content-end">
+            <div class="col-lg-6 py-auto">
+                <div class="d-flex justify-content-end align-items-center my-auto py-auto"> <!-- Vertically center the buttons and icons -->
                     @if(Auth::check())
                         @if (Auth::user()->admin == 1 || Auth::user()->id == $user->id)
                             <form method="POST" action="{{ route('remove-post', ['postid'=>$post->id]) }}">
@@ -41,16 +45,16 @@
                         @endif
                     @endif
                     @if(Auth::user()->id == $user->id || Auth::user()->admin == 1)
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editPostModal">
-                        <i class="fa fa-pencil"></i>
-                    </button>
+                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editPostModal">
+                            <i class="fa fa-pencil"></i>
+                        </button>
                     @endif
                     @include('templates/like')
                 </div>
             </div>
         </div>
-      
     </div>
+
 
     <!-- POST COMMENTS -->
    <ul class="list-group list-group-flush">
