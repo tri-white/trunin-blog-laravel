@@ -33,7 +33,7 @@
                 <p class="my-auto me-2 text-muted">{{ $post->category }}</p>
             </div>
             <div class="col-lg-6 py-auto">
-                <div class="d-flex justify-content-end align-items-center my-auto py-auto"> <!-- Vertically center the buttons and icons -->
+                <div class="d-flex justify-content-end align-items-center my-auto py-auto">
                     @if(Auth::check())
                         @if (Auth::user()->admin == 1 || Auth::user()->id == $user->id)
                             <form method="POST" action="{{ route('remove-post', ['postid'=>$post->id]) }}">
