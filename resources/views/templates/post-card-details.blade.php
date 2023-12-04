@@ -2,7 +2,7 @@
 @php
                 $user = \App\Models\User::where('id', $post->userid)->first();
             @endphp
-<div class="card mb-5 col-6 mx-auto px-auto mt-5 shadow">
+<div class="card mb-5 col-lg-6 mx-auto px-auto mt-5 shadow">
     <div class="card-body">
         <a href="{{ route('profile', $user->id) }}" class="text-decoration-none link-dark">
             <div class="d-flex align-items-center">
@@ -48,9 +48,9 @@
                             </form>
                         @endif
                         @if(Auth::user()->id == $user->id || Auth::user()->admin == 1)
-                        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editPostModal">
-                            <i class="fa fa-pencil"></i>
-                        </button>
+                    <a href="{{ route('edit-post', ['postid' => $post->id]) }}">
+                        <i class="fa fa-pencil"></i>
+                    </a>
                     @endif
                     @endif
                     
@@ -101,31 +101,5 @@
    </div>
     @endif
     <!-- END YOUR COMMENT -->
-    <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editPostModalLabel">Редагування посту</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="{{ route('edit-post', ['postid'=>$post->id]) }}">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="editedTitle">Редагування заголовку поста:</label>
-                        <input type="text" class="form-control" id="editedTitle" name="editedTitle"
-                            value="{{ $post->title }}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editedDescription">Редагування опису поста:</label>
-                        <textarea class="form-control" id="editedDescription" name="editedDescription"
-                            rows="4">{{ $post->description }}</textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Зберегти зміни</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 <!-- POST END -->

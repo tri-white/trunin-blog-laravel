@@ -35,7 +35,7 @@ class CommentController extends Controller
         $comment->description = $request->input('editedComment');
         $comment->save();
     
-        return redirect()->route('welcome')->with('success', 'Коментар було відредаговано');
+        return redirect()->route('post-details', $comment->postid)->with('success', 'Коментар було відредаговано');
     }
     
 }

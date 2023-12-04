@@ -7,6 +7,8 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 class PostController extends Controller
 {
     public function index()
@@ -111,12 +113,24 @@ class PostController extends Controller
         $request->validate([
             'editedTitle' => 'required|max:255',
             'editedDescription' => 'required|max:1000',
+            'editedPhoto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+    
         $post = Post::find($postid);
         $post->title = $request->input('editedTitle');
         $post->description = $request->input('editedDescription');
+    
+        if ($request->hasFile('editedPhoto')) {
+
+            if($post->photo_path != null)
+                Storage::delete($post->photo_path);
+    
+            $photoPath = $request->file('editedPhoto')->store('public/postAsk');
+            $post->photo_path = $photoPath;
+        }
+    
         $post->save();
-        return redirect()->route('welcome')->with('success', 'Пост було відредаговано');
+        
+        return redirect()->route('post-details', $postid)->with('success', 'Пост було відредаговано');
     }
 }
