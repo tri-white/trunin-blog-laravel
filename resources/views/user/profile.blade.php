@@ -1,9 +1,6 @@
 @extends('shared/layout')
 
 @section('content')
-@if(session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-@endif
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-12">

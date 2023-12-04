@@ -28,12 +28,6 @@ class PostController extends Controller
             'post-photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        if ($request->hasFile('post-photo')) {
-            $photoPath = $request->file('post-photo')->store('photos', 'public');
-        } else {
-            $photoPath = null;
-        }
-
         $post = new Post();
         $post->title = $request->input('post-title');
         $post->description = $request->input('post-description');
@@ -54,7 +48,7 @@ class PostController extends Controller
             $photoPath = $request->file('post-photo')->store('public/postAsk');
             $post->photo_path = $photoPath;
         }
-
+        
         $post->save();
 
         return redirect()->route('welcome')->with('success', 'Пост успішно створено.');

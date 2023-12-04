@@ -81,9 +81,18 @@ class UserController extends Controller
 
     public function editUserPhoto(Request $request, $userid)
     {
-        // Logic to update user photo
-        // ...
-        return redirect()->back()->with('success', 'Photo updated successfully.');
+        $request->validate([
+            'editedPhoto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $user = User::find($userid);
+
+        $photoPath = $request->file('editedPhoto')->store('public/userAvatars');
+        $user->photo = $photoPath;
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'Фотографію успішно завантажено.');
     }
 
     public function changePassword(Request $request, $userid)
