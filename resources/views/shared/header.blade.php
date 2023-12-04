@@ -1,23 +1,20 @@
 <header>
-    <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom border-2 border-primary">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark border-bottom border-2 border-danger">
         <div class="container">
-            <a class="navbar-brand fs-3" href="{{ url('/') }}">Trunin Blog</a>
+            <a class="navbar-brand fs-3 text-light" href="{{ url('/') }}">Nosebook</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon text-light"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto fs-5">
                     <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0">
-                        <a class="nav-link" href="{{ url('/') }}">Блог</a>
-                    </li>
-                    <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0">
-                        <a class="nav-link" href="{{ url('/about') }}">Про сайт</a>
+                        <a class="nav-link text-light" href="{{ url('/') }}">Стрічка</a>
                     </li>
                     <li class="nav-item mx-lg-2 mx-md-1 mx-sm-0 dropdown">
-                        <a class="nav-link dropdown-toggle pe-auto" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle pe-auto text-light" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                            @if(Auth::check())
                                {{ Auth::user()->login }}

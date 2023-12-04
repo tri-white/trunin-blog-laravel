@@ -13,8 +13,8 @@
           </section>
         </div>
     <!-- Назва та дані сайту-->
-    <div class="text-center p-3 bg-primary">
+    <div class="text-center p-3 bg-dark">
           © 2023
-          <a class="text-white" href="/">Trunin-blog</a>
+          <a class="text-white" href="/">Noseboook</a>
         </div>
   </footer>
