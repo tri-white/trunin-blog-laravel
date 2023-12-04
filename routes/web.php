@@ -6,6 +6,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\FriendRequestController;
 
 
 Route::get('/about', function () {
@@ -43,15 +44,22 @@ Route::post('/like/{postid}/{userid}', [LikeController::class, 'change'])->name(
 
 
 
-// Route for editing user login
 Route::post('/edit-user/{userid}', [UserController::class, 'editUser'])->name('edit-user');
 
-// Route for editing user photo
+
 Route::post('/edit-user-photo/{userid}', [UserController::class, 'editUserPhoto'])->name('edit-user-photo');
 
-// Route for changing user password
 Route::post('/change-password/{userid}', [UserController::class, 'changePassword'])->name('change-password');
 
 
+
+
+Route::post('/add-friend/{friendId}', [UserController::class, 'addFriend'])->name('add-friend');
+
+// routes/web.php
+
+Route::get('/friend-requests', [FriendRequestController::class, 'index'])->name('friend-requests');
+Route::post('/accept-friend-request/{requestId}', [FriendRequestController::class, 'accept'])->name('accept-friend-request');
+Route::post('/decline-friend-request/{requestId}', [FriendRequestController::class, 'decline'])->name('decline-friend-request');
 
 

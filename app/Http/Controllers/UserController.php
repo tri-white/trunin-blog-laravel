@@ -115,5 +115,18 @@ class UserController extends Controller
     }
 
 
-    
+    public function addFriend(Request $request, $friendId)
+    {
+        $user = Auth::user();
+        $friend = User::find($friendId);
+
+        if (!$user->isFriendWith($friend) && !$user->hasSentFriendRequestTo($friend)) {
+            $user->sentFriendRequests()->attach($friendId);
+
+            return redirect()->back()->with('success', 'Запит в друзі успішно надіслано');
+        }
+
+        return redirect()->back()->with('error', 'Не вдалося надіслати запит на дружбу');
+    }
+
 }

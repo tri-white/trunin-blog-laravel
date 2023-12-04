@@ -24,7 +24,12 @@
                         <i class="fa fa-pencil"></i>
                     </button>
                 @endif
-
+                @if(!Auth::user()->hasSentFriendRequestTo($user) && Auth::user()->id !== $user->id)
+                        <form method="POST" action="{{ route('add-friend', ['friendId' => $user->id]) }}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Додати у друзі</button>
+                        </form>
+                    @endif
                 @endif
 
             </div>
