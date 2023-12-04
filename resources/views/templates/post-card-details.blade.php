@@ -28,6 +28,10 @@
             {{ $post->description }}
         </p>
 
+        @if ($post->photo_path)
+            <img src="{{ asset(str_replace('public/', 'storage/', $post->photo_path)) }}" alt="Post Image" class="img-fluid" style="height:100%;">
+        @endif               
+
         <div class="d-flex justify-content-between align-items-center py-auto mt-2">
             <div class="col-lg-6 py-auto">
                 <p class="my-auto me-2 text-muted">{{ $post->category }}</p>
