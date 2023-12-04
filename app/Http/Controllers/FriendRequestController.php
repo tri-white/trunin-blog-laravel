@@ -26,7 +26,7 @@ class FriendRequestController extends Controller
         }
 
         Auth::user()->friends()->attach($friendRequest->sender_id);
-
+        
         $friendRequest->delete();
 
         return redirect()->route('friend-requests')->with('success', 'Запит на дружбу прийнято');

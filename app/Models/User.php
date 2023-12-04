@@ -16,11 +16,25 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class, 'userid');
     }
-    public function friends()
+
+     public function initiatedFriendships(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id');
     }
 
+    public function receivedFriendships(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'friends', 'friend_id', 'user_id');
+    }
+
+    public function mergedFriends()
+    {
+        return $this->initiatedFriendships->merge($this->receivedFriendships);
+    }
+    public function friends(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id');
+    }
     public function isFriendWith(User $user): bool
     {
         return $this->friends()->where('friend_id', $user->id)->exists();

@@ -55,6 +55,7 @@ Route::post('/change-password/{userid}', [UserController::class, 'changePassword
 
 
 Route::post('/add-friend/{friendId}', [UserController::class, 'addFriend'])->name('add-friend');
+Route::post('/remove-friend/{friendId}', [UserController::class, 'removeFriend'])->name('remove-friend');
 
 // routes/web.php
 
@@ -63,3 +64,4 @@ Route::post('/accept-friend-request/{requestId}', [FriendRequestController::clas
 Route::post('/decline-friend-request/{requestId}', [FriendRequestController::class, 'decline'])->name('decline-friend-request');
 
 Route::get('/friends', [UserController::class, 'viewFriends'])->name('friends');
+

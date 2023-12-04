@@ -128,10 +128,32 @@ class UserController extends Controller
         return redirect()->back()->with('error', 'Не вдалося надіслати запит на дружбу');
     }
 
+    public function removeFriend(Request $request, $friendId)
+    {
+        $user = auth()->user();
+        $friend = User::find($friendId);
+    
+        if ($user->isFriendWith($friend)) {
+            $user->friends()->detach($friendId);
+    
+            return redirect()->back()->with('success', 'Друга успішно видалено');
+        }
+        if($friend->isFriendWith($user)){
+            $friend->friends()->detach($user->id);
+    
+            return redirect()->back()->with('success', 'Друга успішно видалено');
+        }
+    
+        return redirect()->back()->with('error', 'Не вдалося видалити друга');
+    }
+
     public function viewFriends()
     {
-        $friends = auth()->user()->friends;
+        $initiatedFriendships = auth()->user()->initiatedFriendships;
+        $receivedFriendships = auth()->user()->receivedFriendships;
+        $friends = $initiatedFriendships->merge($receivedFriendships);
 
         return view('friends', compact('friends'));
     }
+
 }

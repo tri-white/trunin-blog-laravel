@@ -24,11 +24,22 @@
                         <i class="fa fa-pencil"></i>
                     </button>
                 @endif
-                @if(!Auth::user()->hasSentFriendRequestTo($user) && Auth::user()->id !== $user->id)
-                        <form method="POST" action="{{ route('add-friend', ['friendId' => $user->id]) }}">
-                            @csrf
-                            <button type="submit" class="btn btn-primary">Додати у друзі</button>
-                        </form>
+                    @if(Auth::user()->id !== $user->id)
+                    @php 
+                    $friends = App\Models\friend::where('user_id',$user->id)->where('friend_id',Auth::user()->id)->first();
+                    $friends2 = App\Models\friend::where('friend_id',$user->id)->where('user_id',Auth::user()->id)->first();
+                    @endphp
+                        @if(isset($friends) || isset($friends2))
+                            <form method="POST" action="{{ route('remove-friend', ['friendId' => $user->id]) }}">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Видалити з друзів</button>
+                            </form>
+                        @elseif(!Auth::user()->hasSentFriendRequestTo($user))
+                            <form method="POST" action="{{ route('add-friend', ['friendId' => $user->id]) }}">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Додати у друзі</button>
+                            </form>
+                        @endif
                     @endif
                 @endif
 
