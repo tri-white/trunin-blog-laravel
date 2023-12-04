@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
 class UserController extends Controller
 {
     public function profile($userid)
@@ -129,4 +128,10 @@ class UserController extends Controller
         return redirect()->back()->with('error', 'Не вдалося надіслати запит на дружбу');
     }
 
+    public function viewFriends()
+    {
+        $friends = auth()->user()->friends;
+
+        return view('friends', compact('friends'));
+    }
 }

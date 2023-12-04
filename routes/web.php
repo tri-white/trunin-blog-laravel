@@ -62,4 +62,4 @@ Route::get('/friend-requests', [FriendRequestController::class, 'index'])->name(
 Route::post('/accept-friend-request/{requestId}', [FriendRequestController::class, 'accept'])->name('accept-friend-request');
 Route::post('/decline-friend-request/{requestId}', [FriendRequestController::class, 'decline'])->name('decline-friend-request');
 
-
+Route::get('/friends', [UserController::class, 'viewFriends'])->name('friends');
