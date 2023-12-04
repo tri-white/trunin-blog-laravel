@@ -53,25 +53,58 @@
     </div>
 </div>
 
-<!-- Edit User Login -->
 <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editUserModalLabel">Редагування логіну користувача</h5>
+                <h5 class="modal-title" id="editUserModalLabel">Редагування користувача</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+
+                <!-- Edit User Login Form -->
                 <form method="POST" action="{{ route('edit-user', ['userid'=>$user->id]) }}">
                     @csrf
                     <div class="mb-3">
                         <label for="editedLogin">Відредагувати логін користувача:</label>
                         <input type="text" class="form-control" id="editedLogin" name="editedLogin" value="{{ $user->login }}">
                     </div>
-                    <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+                    <button type="submit" class="btn btn-primary">Зберегти зміни логіну</button>
                 </form>
+
+                <hr>
+
+                <!-- Edit User Photo Form -->
+                <form method="POST" action="{{ route('edit-user-photo', ['userid'=>$user->id]) }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="editedPhoto">Змінити фото користувача:</label>
+                        <input type="file" class="form-control" id="editedPhoto" name="editedPhoto">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Змінити фото</button>
+                </form>
+
+                <hr>
+
+               <!-- Change User Password Form -->
+<form method="POST" action="{{ route('change-password', ['userid'=>$user->id]) }}">
+    @csrf
+    <div class="mb-3">
+        <label for="currentPassword">Введіть поточний пароль:</label>
+        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="newPassword">Введіть новий пароль:</label>
+        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Змінити пароль</button>
+</form>
+
             </div>
         </div>
     </div>
 </div>
+
 @endsection

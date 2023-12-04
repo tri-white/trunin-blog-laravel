@@ -37,9 +37,20 @@ Route::post('/comment/{userid}/{postid}', [CommentController::class, 'create'])-
 Route::get('/edit-comment/{commentid}', [CommentController::class, 'edit'])->name('edit-comment');
 Route::post('/update-comment/{commentid}', [CommentController::class, 'update'])->name('update-comment');
 
+
+
 Route::post('/like/{postid}/{userid}', [LikeController::class, 'change'])->name('like');
 
 
+
+// Route for editing user login
+Route::post('/edit-user/{userid}', [UserController::class, 'editUser'])->name('edit-user');
+
+// Route for editing user photo
+Route::post('/edit-user-photo/{userid}', [UserController::class, 'editUserPhoto'])->name('edit-user-photo');
+
+// Route for changing user password
+Route::post('/change-password/{userid}', [UserController::class, 'changePassword'])->name('change-password');
 
 
 

@@ -21,21 +21,21 @@ $user = \App\Models\User::find($post->userid);
         </a>
         <hr>
         <a href="{{ route('post-details', $post->id) }}" class="text-decoration-none link-dark">
-        <p class="text-wrap fs-3 text-center">
-            {{ $post->title }}
-        </p>
-        <hr>
-        <p class="text-wrap fs-5">
-            {{ strlen($post->description) > 200 ? substr($post->description, 0, 200) . '...' : $post->description }}
-        </p>
+            <p class="text-wrap fs-3 text-center">
+                {{ $post->title }}
+            </p>
+            <hr>
+            <p class="text-wrap fs-5">
+                {{ strlen($post->description) > 200 ? substr($post->description, 0, 200) . '...' : $post->description }}
+            </p>
 
-        @if ($post->photo_path)
-            <img src="{{ asset(str_replace('public/', 'storage/', $post->photo_path)) }}" alt="Post Image" class="img-fluid">
-        @endif  
+            @if ($post->photo_path)
+                <img src="{{ asset(str_replace('public/', 'storage/', $post->photo_path)) }}" alt="Post Image" class="img-fluid">
+            @endif  
 
-        <a href="{{ route('post-details',$post->id) }}" class="d-flex justify-content-end text-decoration-none">
-            Детальніше...
-        </a>
+            <a href="{{ route('post-details',$post->id) }}" class="d-flex justify-content-end text-decoration-none">
+                Детальніше...
+            </a>
         </a>
 
         <div class="d-flex justify-content-between mt-2 align-items-center">

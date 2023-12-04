@@ -65,7 +65,6 @@ class UserController extends Controller
 
         return redirect()->route('login')->with('success', 'Регістрація успішна. Тепер авторизуйтесь');
     }
-
     public function editUser(Request $request, $userid)
     {
         $request->validate([
@@ -78,5 +77,31 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Успішно змінено логін');
+    }
+
+    public function editUserPhoto(Request $request, $userid)
+    {
+        // Logic to update user photo
+        // ...
+        return redirect()->back()->with('success', 'Photo updated successfully.');
+    }
+
+    public function changePassword(Request $request, $userid)
+    {
+        $request->validate([
+            'currentPassword' => 'required|string',
+            'newPassword' => 'required|string|min:8',
+        ]);
+
+        $user = User::find($userid);
+
+        if (!Hash::check($request->input('currentPassword'), $user->password)) {
+            return redirect()->back()->with('error', 'Неправильний пароль!');
+        }
+
+        $user->password = bcrypt($request->input('newPassword'));
+        $user->save();
+
+        return redirect()->back()->with('success', 'Пароль успішно змінено.');
     }
 }
