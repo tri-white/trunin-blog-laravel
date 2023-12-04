@@ -7,7 +7,7 @@ $user = \App\Models\User::find($post->userid);
         <a href="{{ route('profile', $user->id) }}" class="text-decoration-none link-dark">
             <div class="d-flex">
                 <div class="img-container" style="height:50px; width:50px;">
-                    <img src="{{ $user->photo ? $user->photo : asset('images/user_male.jpg') }}"
+                    <img src="{{ $user->photo ? asset(str_replace('public/', 'storage/', $user->photo)) : asset('images/user_male.jpg') }}"
                         style="width:100%; height:100%; object-fit: contain;"
                         class="rounded-circle border border-1 border-dark" alt="Profile Picture">
                 </div>

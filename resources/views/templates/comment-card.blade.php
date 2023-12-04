@@ -3,7 +3,7 @@
         <a href="{{ route('profile', $row_user->id) }}" class="text-decoration-none link-dark">
             <div class="other d-flex align-items-center">
                 <div class="img-container d-flex" style="height:35px; width:35px;">
-                    <img src="{{ $user->photo ? asset($user->photo) : asset('images/user_male.jpg') }}"
+                    <img src="{{ $user->photo ? asset(str_replace('public/', 'storage/', $user->photo)) : asset('images/user_male.jpg') }}"
                         style="width:100%; height:100%; object-fit: contain;"
                         class="rounded-circle border border-1 border-dark" alt="Profile Picture">
                 </div>
