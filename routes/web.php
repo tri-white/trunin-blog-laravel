@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\FriendRequestController;
+use App\Http\Controllers\ChatsController;
 
 
 Route::get('/about', function () {
@@ -65,3 +66,6 @@ Route::post('/decline-friend-request/{requestId}', [FriendRequestController::cla
 
 Route::get('/friends', [UserController::class, 'viewFriends'])->name('friends');
 
+
+Route::get('/chat', [ChatsController::class, 'index'])->name('chat');
+Route::get('messages', [ChatsController::class, 'fetchMessages']);

@@ -34,6 +34,7 @@
                                 @csrf
                                 <button type="submit" class="btn btn-danger">Видалити з друзів</button>
                             </form>
+                            <a href="{{route('chat')}}">Надіслати повідомлення</a>
                         @elseif(!Auth::user()->hasSentFriendRequestTo($user))
                             <form method="POST" action="{{ route('add-friend', ['friendId' => $user->id]) }}">
                                 @csrf
