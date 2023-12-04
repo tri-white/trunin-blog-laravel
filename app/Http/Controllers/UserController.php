@@ -113,4 +113,7 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Пароль успішно змінено.');
     }
+
+
+    
 }
