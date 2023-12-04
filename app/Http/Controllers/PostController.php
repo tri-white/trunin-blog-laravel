@@ -25,29 +25,41 @@ class PostController extends Controller
             'post-description' => 'required|string|max:1000',
             'post-category' => 'required|string|max:30',
             'post-title' => 'required|string|max:50',
+            'post-photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        
+
+        if ($request->hasFile('post-photo')) {
+            $photoPath = $request->file('post-photo')->store('photos', 'public');
+        } else {
+            $photoPath = null;
+        }
+
         $post = new Post();
         $post->title = $request->input('post-title');
         $post->description = $request->input('post-description');
-        if($request->input('post-category') == "no"){
-            $post->category=null;
-        }
-        else if($request->input('post-category') == "StudyScience"){
+        
+        if ($request->input('post-category') == "no") {
+            $post->category = null;
+        } elseif ($request->input('post-category') == "StudyScience") {
             $post->category = "Освіта та наука";
-        }
-        else if($request->input('post-category') == "Entertainment"){
+        } elseif ($request->input('post-category') == "Entertainment") {
             $post->category = "Розваги";
-        }
-        else if($request->input('post-category') == "LifeSport"){
+        } elseif ($request->input('post-category') == "LifeSport") {
             $post->category = "Життя та спорт";
         }
+
         $post->userid = Auth::user()->id;
+
+        if ($request->hasFile('post-photo')) {
+            $photoPath = $request->file('post-photo')->store('public/postAsk');
+            $post->photo_path = $photoPath;
+        }
 
         $post->save();
 
         return redirect()->route('welcome')->with('success', 'Пост успішно створено.');
     }
+
 
     public function searchAction(Request $request)
     {

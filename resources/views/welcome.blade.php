@@ -17,23 +17,27 @@
             <form method="post" action="{{ route('create-post') }}" enctype="multipart/form-data">
               @csrf
               <div class="mb-3">
-                        <input type="text" name="post-title" class="form-control" placeholder="Заголовок поста">
-                    </div>
-                <textarea name="post-description" class="form-control" id="contentInput" rows="5"
-                  placeholder="Що у вас нового?"></textarea>
-                <div class="row d-flex justify-content-between">
-                  <div class="col-lg-4 col-md-6 col-sm-12 mt-1">
-                    <select name="post-category" class="form-select" aria-label="Категорія" style="width:100%;">
-                      <option value="no">Без категорії</option>
-                      <option value="StudyScience">Освіта та наука</option>
-                      <option value="Entertainment">Розваги</option>
-                      <option value="LifeSport">Життя та спорт</option>
-                    </select>
-                  </div>
-                  <div class="col-lg-4 col-md-12 col-sm-12 mt-1">
-                    <button type="submit" class="btn btn-outline-primary" style="width:100%;">Опублікувати</button>
-                  </div>
+                <input type="text" name="post-title" class="form-control" placeholder="Заголовок поста">
+              </div>
+              <textarea name="post-description" class="form-control" id="contentInput" rows="5"
+                placeholder="Що у вас нового?"></textarea>
+              <div class="mb-3">
+                <label for="photoInput" class="form-label">Виберіть фото</label>
+                <input type="file" class="form-control" id="photoInput" name="post-photo">
+              </div>
+              <div class="row d-flex justify-content-between">
+                <div class="col-lg-4 col-md-6 col-sm-12 mt-1">
+                  <select name="post-category" class="form-select" aria-label="Категорія" style="width:100%;">
+                    <option value="no">Без категорії</option>
+                    <option value="StudyScience">Освіта та наука</option>
+                    <option value="Entertainment">Розваги</option>
+                    <option value="LifeSport">Життя та спорт</option>
+                  </select>
                 </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 mt-1">
+                  <button type="submit" class="btn btn-outline-primary" style="width:100%;">Опублікувати</button>
+                </div>
+              </div>
             </form>
           </div>
         </div>

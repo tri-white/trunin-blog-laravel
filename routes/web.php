@@ -33,8 +33,6 @@ Route::get('/post/{postid}', [PostController::class, 'postDetails'])->name('post
 Route::get('/edit-post/{postid}', [PostController::class, 'edit'])->name('edit-post');
 Route::post('/update-post/{postid}', [PostController::class, 'update'])->name('update-post');
 
-
-
 Route::post('/comment/{userid}/{postid}', [CommentController::class, 'create'])->name('add-comment');
 Route::get('/edit-comment/{commentid}', [CommentController::class, 'edit'])->name('edit-comment');
 Route::post('/update-comment/{commentid}', [CommentController::class, 'update'])->name('update-comment');

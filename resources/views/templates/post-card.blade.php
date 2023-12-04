@@ -127,6 +127,5 @@ $user = \App\Models\User::find($post->userid);
     
     
 </div>
-<!-- Edit Post -->
 
 <!-- POST END -->
