@@ -28,14 +28,14 @@ Route::get('/post/{postid}', [PostController::class, 'postDetails'])->name('post
 Route::middleware(['auth'])->group(function () {
    Route::get('/email/verify', function () {
     $successMessage = 'Підтвердіть реєстрацію за інструкціями які надійшли вам на пошту';
-    return redirect()->route('welcome')->with('success-email', $successMessage);
+    return redirect()->route('welcome', ['page'=>1, 'searchKey'=>'all','category'=>'all','sort'=>'date-desc'])->with('success-email', $successMessage);
     })->name('verification.notice');
 
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
 
-        return redirect()->route('welcome')->with('success','Успішно верифіковано!');
+        return redirect()->route('welcome', ['page'=>1, 'searchKey'=>'all','category'=>'all','sort'=>'date-desc'])->with('success','Успішно верифіковано!');
     })->middleware(['signed'])->name('verification.verify');
 
     Route::post('/email/verification-notification', function (Request $request) {
