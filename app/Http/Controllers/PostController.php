@@ -13,12 +13,89 @@ class PostController extends Controller
 {
     public function index()
     {
+        $page = 1;
         $sort = "date-desc";
-        $key = "";
+        $key = "test";
         $cat = "all";
-        $posts = $this->search($key,$cat,$sort);
 
-        return view('welcome', compact('posts', 'sort', 'key', 'cat'));
+        $query = Post::query();
+
+    
+        if ($key != "all") {
+            $query->where('description', 'like', '%' . $key . '%')->orWhere('title','like','%'.$key.'%');
+        }
+    
+        if ($cat !== 'all') {
+            if($cat=="null") {
+                $query->where('category',NULL);
+            }
+            else{
+                $query->where('category', $cat);
+            }
+        }
+    
+        if ($sort === 'date-desc') {
+            $query->orderByDesc('created_at');
+        } elseif ($sort === 'date-asc') {
+            $query->orderBy('created_at');
+        }elseif ($sort === 'like-desc') {
+            $query->orderByDesc('likes');
+        } elseif ($sort === 'like-asc') {
+            $query->orderBy('likes');
+        }
+    
+        $posts = $query->get();
+        
+        $postsPerPage = 5;
+        $startIndex = ($page - 1) * $postsPerPage;
+        $totalPages = ceil($posts->count() / $postsPerPage);
+        $currentPagePosts = $posts->slice($startIndex, $postsPerPage);
+        $currentPage = $page;
+        
+        return view('welcome', compact('currentPage', 'totalPages', 'currentPagePosts', 'sort', 'key', 'cat'));
+
+    }
+    public function indexe($page, $searchKey, $category, $sort)
+    {
+        $page = (int)$page;
+
+        $query = Post::query();
+    
+        if ($searchKey !== "all") {
+            $query->where('description', 'like', '%' . $searchKey . '%')->orWhere('title','like','%'.$searchKey.'%');
+        }
+    
+        if ($category !== 'all') {
+            if($category==="null") {
+                $query->where('category',NULL);
+            }
+            else{
+                $query->where('category', $category);
+            }
+        }
+    
+        if ($sort === 'date-desc') {
+            $query->orderByDesc('created_at');
+        } elseif ($sort === 'date-asc') {
+            $query->orderBy('created_at');
+        }elseif ($sort === 'like-desc') {
+            $query->orderByDesc('likes');
+        } elseif ($sort === 'like-asc') {
+            $query->orderBy('likes');
+        }
+    
+        $posts = $query->get();
+        
+        $postsPerPage = 5;
+        $startIndex = ($page - 1) * $postsPerPage;
+        $totalPages = ceil($posts->count() / $postsPerPage);
+        $currentPagePosts= $posts->slice($startIndex, $postsPerPage);
+        $currentPage = $page;
+
+        $key = $searchKey;
+        $cat = $category;
+
+        return view('welcome', compact('currentPage', 'totalPages', 'currentPagePosts', 'sort', 'key', 'cat'));
 
     }
     public function create(Request $request)
@@ -63,46 +140,12 @@ class PostController extends Controller
         $cat = $request->input('post-category-filter');
         $sort = $request->input('post-sort');
 
-        $posts = $this->search($key,$cat,$sort);
-
-        return view('welcome', compact('posts', 'key', 'cat', 'sort'));
+        return $this->indexe(1, $key, $cat,$sort);
     }
 
     public function postDetails($postid){
         $post = Post::where('id', $postid)->first();
         return view('post')->with('post', $post);
-    }
-
-    public function search($key, $cat, $sort)
-    {
-        $query = Post::query();
-    
-        if ($key != "") {
-            $query->where('description', 'like', '%' . $key . '%')->orWhere('title','like','%'.$key.'%');
-        }
-    
-        if ($cat !== 'all') {
-            if($cat=="null") {
-                $query->where('category',NULL);
-            }
-            else{
-                $query->where('category', $cat);
-            }
-        }
-    
-        if ($sort === 'date-desc') {
-            $query->orderByDesc('created_at');
-        } elseif ($sort === 'date-asc') {
-            $query->orderBy('created_at');
-        }elseif ($sort === 'like-desc') {
-            $query->orderByDesc('likes');
-        } elseif ($sort === 'like-asc') {
-            $query->orderBy('likes');
-        }
-    
-        $posts = $query->get();
-    
-        return $posts;
     }
     public function edit($postid) {
         $post = Post::find($postid);

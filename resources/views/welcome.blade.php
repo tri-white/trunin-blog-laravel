@@ -93,11 +93,27 @@
         </div>
         <div class="row d-flex justify-content-center">
           <div class="col-lg-8 col-md-10 col-sm-12">
+            @if (!$currentPagePosts || $currentPagePosts->count()==0)
+        <div class='mb-5 text-muted col-lg-12 text-center display-4'>
+            Не знайдено постів
+        </div>
 
-            @foreach($posts as $post)
-
-                @include('templates/post-card')
+        @else
+            @foreach($currentPagePosts as $post)
+              @include('templates/post-card')
             @endforeach
+        @endif
+        <nav aria-label="Page navigation example" class="mt-5">
+            <ul class="pagination justify-content-center">
+                @for ($page = 1; $page <= $totalPages; $page++) <li
+                    class="page-item{{ $page == $currentPage ? ' active' : '' }}">
+                    <a class="page-link"
+                        href="{{ route('welcome', ['page' => $page, 'searchKey' => $key, 'category'=>$cat,'sort'=>$sort]) }}">{{ $page }}</a>
+                    </li>
+                    @endfor
+            </ul>
+        </nav>
+
           </div>
         </div>
       </div>

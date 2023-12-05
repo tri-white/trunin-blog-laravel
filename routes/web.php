@@ -17,8 +17,8 @@ Route::get('/login', [UserController::class, 'loginView'])->name('loginView');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/profile/{userid}', [UserController::class, 'profile'])->name('profile');
 
-
-Route::get('/', [PostController::class, 'index'])->name('welcome');
+Route::get('/', [PostController::class, 'index']);
+Route::get('/{page}/{searchKey}/{category}/{sort}', [PostController::class, 'indexe'])->name('welcome');
 Route::get('/search', [PostController::class, 'searchAction'])->name('post-search');
 Route::get('/post/{postid}', [PostController::class, 'postDetails'])->name('post-details');
 
