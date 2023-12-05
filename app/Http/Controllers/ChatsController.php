@@ -11,13 +11,10 @@ class ChatsController extends Controller
 {
     public function indexe()
   {
-      $initiatedFriendships = auth()->user()->initiatedFriendships;
-      $receivedFriendships = auth()->user()->receivedFriendships;
-      $friends = $initiatedFriendships->merge($receivedFriendships);
 
       $selectedFriendId = request('friend_id');
       
-      $selectedFriend = $friends->firstWhere('id', $selectedFriendId);
+      $selectedFriend = User::firstWhere('id', $selectedFriendId);
 
       $messages = [];
 
@@ -30,6 +27,10 @@ class ChatsController extends Controller
                   ->where('receiver_id', auth()->id());
           })->orderBy('created_at')->get();
       }
+
+      $initiatedFriendships = auth()->user()->initiatedFriendships;
+      $receivedFriendships = auth()->user()->receivedFriendships;
+      $friends = $initiatedFriendships->merge($receivedFriendships);
 
       return view('private_messages', compact('friends', 'selectedFriendId', 'selectedFriend', 'messages'));
   }
@@ -68,5 +69,14 @@ class ChatsController extends Controller
          return view('partialsmessages', compact('messages'));
     }
   
+
+    public function searchFriends(Request $request)
+    {
+        $searchTerm = $request->input('searchTerm');
+
+        $friends = User::where('email', 'like', '%' . $searchTerm . '%')->get();
+
+        return view('private_messages_friends', compact('friends'));
+    }
 
 }

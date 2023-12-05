@@ -72,6 +72,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/fetch-messages/{friendId}', [ChatsController::class, 'fetchMessages'])->name('fetch-messages');
 
+    Route::post('/search-friends', [ChatsController::class, 'searchFriends'])->name('search_friends');
+
 
 });
 
