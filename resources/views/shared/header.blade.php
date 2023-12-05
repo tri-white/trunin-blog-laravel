@@ -17,7 +17,7 @@
                         <a class="nav-link dropdown-toggle pe-auto text-light" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
                            @if(Auth::check())
-                               {{ Auth::user()->login }}
+                               {{ Auth::user()->email }}
                            @else
                                Профіль
                            @endif

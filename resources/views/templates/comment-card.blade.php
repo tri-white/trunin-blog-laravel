@@ -8,7 +8,7 @@
                         class="rounded-circle border border-1 border-secondary" alt="Profile Picture">
                 </div>
                 <div class="ms-2">
-                    <p class="fs-6 m-0">{{ $row_user->login }}</p>
+                    <p class="fs-6 m-0">{{ $row_user->email }}</p>
                     <p class="card-text my-auto text-muted fs-6">{{ $comm->created_at }}</p>
                 </div>
             </div>

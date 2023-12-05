@@ -15,9 +15,9 @@
                                     @if($request->id)
                                         <a href="{{ route('profile', $request->id) }}">
                                             <img src="{{ $request->photo ? asset(str_replace('public/', 'storage/', $request->photo)) : asset('images/user_male.jpg') }}"
-                                                 class="rounded-circle" alt="{{ $request->login }}" style="width: 50px; height: 50px;">
+                                                 class="rounded-circle" alt="{{ $request->email }}" style="width: 50px; height: 50px;">
                                         </a>
-                                        <span>{{ $request->login }}</span>
+                                        <span>{{ $request->email }}</span>
                                         <div class="friend-request-buttons d-flex">
                                             <form method="POST" class="me-2" action="{{ route('accept-friend-request', ['requestId' => $request->id]) }}">
                                                 @csrf

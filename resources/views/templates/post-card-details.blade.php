@@ -13,7 +13,7 @@
                         class="rounded-circle border border-1 border-secondary" alt="Profile Picture">
                 </div>
                 <div class="ms-2">
-                    <h5 class="card-title">{{ $user->login }}</h5>
+                    <h5 class="card-title">{{ $user->email }}</h5>
                     <p class="card-text text-muted">
                         <i class="fa fa-clock"></i> {{ $post->created_at }}
                     </p>

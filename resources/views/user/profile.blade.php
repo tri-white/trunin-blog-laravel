@@ -11,7 +11,7 @@
             </div>
 
             <div class="profile-info text-center mt-2">
-                <h5>{{ $user->login }}</h5>
+                <h5>{{ $user->email }}</h5>
                 @if(Auth::check())
                 @if((Auth::user()->admin == 1 && $user->id !== Auth::user()->id) || Auth::user()->id == $user->id)
                     <form method="POST" action="{{ route('remove-user', ['userid'=>$user->id]) }}">
@@ -75,18 +75,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
-                <!-- Edit User Login Form -->
-                <form method="POST" action="{{ route('edit-user', ['userid'=>$user->id]) }}">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="editedLogin">Відредагувати логін користувача:</label>
-                        <input type="text" class="form-control" id="editedLogin" name="editedLogin" value="{{ $user->login }}">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Зберегти зміни логіну</button>
-                </form>
-
-                <hr>
 
                 <!-- Edit User Photo Form -->
                 <form method="POST" action="{{ route('edit-user-photo', ['userid'=>$user->id]) }}" enctype="multipart/form-data">

@@ -14,8 +14,8 @@
                                 <div class="friend-item">
                                     <a href="{{ route('profile', $friend->id) }}" class="text-decoration-none link-dark">
                                         <img src="{{ $friend->photo ? asset(str_replace('public/', 'storage/', $friend->photo)) : asset('images/user_male.jpg') }}"
-                                             class="rounded-circle" alt="{{ $friend->login }}" style="width: 50px; height: 50px;">
-                                    <span>{{ $friend->login }}</span>
+                                             class="rounded-circle" alt="{{ $friend->email }}" style="width: 50px; height: 50px;">
+                                    <span>{{ $friend->email }}</span>
 </a>
                                 </div>
                             </div>
