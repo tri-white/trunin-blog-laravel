@@ -14,7 +14,7 @@
                                 <div class="friend-request-item">
                                     @if($request->id)
                                         <a href="{{ route('profile', $request->id) }}">
-                                            <img src="{{ $request->photo ? asset(str_replace('public/', 'storage/', $request->photo)) : asset('images/user_male.jpg') }}"
+                                            <img src="{{ $request->photo ? asset('/storage/app/' . $request->photo) : asset('images/user_male.jpg') }}"
                                                  class="rounded-circle" alt="{{ $request->email }}" style="width: 50px; height: 50px;">
                                         </a>
                                         <span>{{ $request->email }}</span>

@@ -8,7 +8,7 @@
         <a href="{{ route('profile', $user->id) }}" class="text-decoration-none link-dark">
             <div class="d-flex">
                 <div class="img-container" style="height:50px; width:50px;">
-                    <img src="{{ $user->photo ? asset(str_replace('public/', 'storage/', $user->photo)) : asset('images/user_male.jpg') }}"
+                    <img src="{{ $user->photo ? asset('/storage/app/' . $user->photo) : asset('images/user_male.jpg') }}"
                         style="width:100%; height:100%; object-fit: contain;"
                         class="rounded-circle border border-1 border-secondary" alt="Profile Picture">
                 </div>
@@ -31,7 +31,7 @@
             </p>
 
             @if ($post->photo_path)
-                <img src="{{ asset(str_replace('public/', 'storage/', $post->photo_path)) }}" alt="Post Image" class="img-fluid">
+                <img src="{{ asset('/storage/app/' . $post->photo_path)) }" alt="Post Image" class="img-fluid">
             @endif  
 
             <a href="{{ route('post-details',$post->id) }}" class="d-flex justify-content-end text-decoration-none" style="color: #007bff;">
