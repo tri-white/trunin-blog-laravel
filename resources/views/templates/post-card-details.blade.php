@@ -30,8 +30,11 @@
         </p>
 
         @if ($post->photo_path)
-            <img src="{{ asset('/storage/app/' . $post->photo_path) }}" alt="Post Image" class="img-fluid" style="height:100%;">
-        @endif               
+            <div style="max-height: 500px; width: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden;">
+                <img src="{{ asset('/storage/app/' . $post->photo_path) }}" alt="Post Image" class="img-fluid" style="max-width: 100%; max-height: 500px; height: auto;">
+            </div>
+        @endif
+            
 
         <div class="d-flex justify-content-between align-items-center py-auto mt-3">
             <div class="col-lg-6 py-auto">

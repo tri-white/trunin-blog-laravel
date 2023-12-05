@@ -31,8 +31,11 @@
             </p>
 
             @if ($post->photo_path)
-                <img src="{{ asset('/storage/app/' . $post->photo_path)) }" alt="Post Image" class="img-fluid">
-            @endif  
+    <div style="max-height: 500px; width: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden;">
+        <img src="{{ asset('/storage/app/' . $post->photo_path) }}" alt="Post Image" class="img-fluid" style="max-width: 100%; max-height: 500px; height: auto;">
+    </div>
+@endif
+
 
             <a href="{{ route('post-details',$post->id) }}" class="d-flex justify-content-end text-decoration-none" style="color: #007bff;">
                 Детальніше...
