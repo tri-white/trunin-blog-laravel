@@ -14,6 +14,17 @@
   </head>
   <body>
   	@include('shared/header')
+      @if(session('success-email'))
+        <div class="alert alert-success d-flex">{{ session('success-email') }}.
+            <form action="{{route('verification.send')}}" method="POST" class="my-0 py-0">
+                @csrf
+                <button type="submit" class="ms-2 my-0 py-0">
+                    Надіслати лист ще раз
+                </button>
+            </form>
+        </div>
+      
+    @endif
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

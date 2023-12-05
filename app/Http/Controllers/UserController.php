@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 class UserController extends Controller
 {
     public function profile($userid)
@@ -30,40 +31,40 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'login' => 'required|string',
+            'email' => 'required|email',
             'password' => 'required|string',
         ]);
-        
+
         $credentials = [
-            'login' => $request->input('login'),
+            'email' => $request->input('email'), 
             'password' => $request->input('password'),
         ];
-    
+
         if (Auth::attempt($credentials)) {
             return redirect()->route('welcome');
         }
-        return redirect()->back()->with('error', 'Неправильний логін або пароль.');
+
+        return redirect()->back()->with('error', 'Неправильний емейл або пароль.'); 
     }
+
     public function registration(Request $request)
     {
         $request->validate([
-            'login' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users', 
             'password' => 'required|string|min:8',
             'password2' => 'required|string|same:password',
         ]);
-        
-        $existingUser = User::where('login', $request->input('login'))->first();
-        if ($existingUser) {
-            return redirect()->back()->with('existing-user', 'Користувач з таким логіном вже існує.');
-        }
 
         $user = new User();
-        $user->login = $request->input('login');
+        $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
         $user->save();
 
-        return redirect()->route('login')->with('success', 'Регістрація успішна. Тепер авторизуйтесь');
+        event(new Registered($user));
+
+        return redirect()->route('login')->with('success', 'Реєстрація успішна. Тепер авторизуйтесь');
     }
+
     public function editUser(Request $request, $userid)
     {
         $request->validate([

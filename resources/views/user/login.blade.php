@@ -10,8 +10,8 @@
                 <form method="post" action="{{ route('login') }}" autocomplete="off">
                     @csrf
                     <div class="mb-3">
-                        <label for="loginInput" class="form-label">Логін</label>
-                        <input value="{{ old('login') }}" name="login" type="text" class="form-control" id="loginInput" required>
+                        <label for="emailInput" class="form-label">Емейл</label>
+                        <input value="{{ old('email') }}" name="email" type="email" class="form-control" id="emailInput" required>
                     </div>
                     <div class="mb-3">
                         <label for="passwordInput" class="form-label">Пароль</label>

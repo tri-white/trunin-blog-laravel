@@ -7,15 +7,15 @@
             <div class="col-lg-6">
                 <h1 class="mb-4 text-center">Реєстрація</h1>
 
-                    @if(session('existing-user'))
-                        <div class="alert alert-danger">{{ session('existing-user') }}</div>
-                    @endif
+                @if(session('existing-user'))
+                    <div class="alert alert-danger">{{ session('existing-user') }}</div>
+                @endif
 
                 <form method="post" action="{{ route('registration') }}" autocomplete="off">
                     @csrf
                     <div class="mb-3">
-                        <label for="loginInput" class="form-label">Логін</label>
-                        <input value="{{ old('login') }}" name="login" type="text" class="form-control" id="loginInput"
+                        <label for="emailInput" class="form-label">Емейл</label>
+                        <input value="{{ old('email') }}" name="email" type="email" class="form-control" id="emailInput"
                                required>
                     </div>
                     <div class="mb-3">
