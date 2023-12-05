@@ -86,22 +86,25 @@ function updateMessages() {
 
 setInterval(updateMessages, 1000);
 
-// Event listener for the scroll event
-$('#messageContainer').on('scroll', function() {
-    // You can add additional logic here if needed
-    // For example, you can check whether the user has scrolled up
-});
-
 // Friend search functionality
 $('#friendSearch').on('input', function() {
-    // Your existing friend search logic
+    var searchTerm = $(this).val().toLowerCase();
+
+    $('.list-group-item').each(function() {
+        var friendEmail = $(this).find('.my-auto').text().toLowerCase();
+        if (friendEmail.includes(searchTerm)) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
 });
 
 $('#sendMessageBtn').on('click', function() {
     var formData = $('#privateMessageForm').serialize(); 
 
     $.ajax({
-        url: '{{ route("send_private_message", $selectedFriend->id) }}',
+        url: '{{ route("send_private_message", $selectedFriend ? $selectedFriend->id : 'null') }}',
         method: 'POST',
         data: formData,
         success: function(response) {
