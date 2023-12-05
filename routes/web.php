@@ -67,6 +67,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/chat', [ChatsController::class, 'index'])->name('chat');
     Route::get('messages', [ChatsController::class, 'fetchMessages']);
 
+    Route::get('/private-messages', [ChatsController::class, 'indexe'])->name('private_messages');
+    Route::post('/private-messages/{user}', [ChatsController::class, 'store'])->name('send_private_message');
+
+    Route::get('/fetch-messages/{friendId}', [ChatsController::class, 'fetchMessages'])->name('fetch-messages');
+
+
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

@@ -33,6 +33,7 @@
                                 <li><a class="dropdown-item" href="{{ route('profile', Auth::user()->id) }}">Мій профіль</a></li>
                                 <li><a class="dropdown-item" href="{{ route('friends') }}">Мої друзі</a></li>
                                 <li><a class="dropdown-item" href="{{ route('friend-requests') }}">Запити в друзі</a></li>
+                                <li><a class="dropdown-item" href="{{ route('private_messages') }}">Чати</a></li>
                                 <li><a class="dropdown-item" href="{{ route('logout') }}">Вихід з профілю</a></li>
                             @else
                                 <li><a class="dropdown-item" href="{{ route('loginView') }}">Авторизація</a></li>

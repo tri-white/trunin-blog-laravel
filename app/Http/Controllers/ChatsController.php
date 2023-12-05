@@ -3,57 +3,70 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Message;
+use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use App\Events\MessageSent;
-
+use App\Models\User;
 class ChatsController extends Controller
 {
-    // app/Http/Controllers/ChatsController.php
+    public function indexe()
+  {
+      $initiatedFriendships = auth()->user()->initiatedFriendships;
+      $receivedFriendships = auth()->user()->receivedFriendships;
+      $friends = $initiatedFriendships->merge($receivedFriendships);
+
+      $selectedFriendId = request('friend_id');
+      
+      $selectedFriend = $friends->firstWhere('id', $selectedFriendId);
+
+      $messages = [];
+
+      if ($selectedFriend) {
+          $messages = Message::where(function ($query) use ($selectedFriend) {
+              $query->where('sender_id', auth()->id())
+                  ->where('receiver_id', $selectedFriend->id);
+          })->orWhere(function ($query) use ($selectedFriend) {
+              $query->where('sender_id', $selectedFriend->id)
+                  ->where('receiver_id', auth()->id());
+          })->orderBy('created_at')->get();
+      }
+
+      return view('private_messages', compact('friends', 'selectedFriendId', 'selectedFriend', 'messages'));
+  }
+
+  public function store(User $user)
+  {
+      $validatedData = request()->validate([
+          'message' => 'required|string',
+      ]);
+
+      Message::create([
+          'sender_id' => auth()->id(),
+          'receiver_id' => $user->id,
+          'message' => $validatedData['message'],
+      ]);
+
+      return redirect()->route('private_messages', ['friend_id' => $user->id]);
+  }
+
+  public function fetchMessages($friendId)
+    {
+        $selectedFriend = User::find($friendId);
+
+        if (!$selectedFriend) {
+            return response()->json(['error' => 'Friend not found'], 404);
+        }
+        $messages = Message::where(function ($query) use ($selectedFriend) {
+            $query->where('sender_id', auth()->id())
+                ->where('receiver_id', $selectedFriend->id);
+        })->orWhere(function ($query) use ($selectedFriend) {
+            $query->where('sender_id', $selectedFriend->id)
+                ->where('receiver_id', auth()->id());
+        })->orderBy('created_at')->get();
 
 
-public function __construct()
-{
-  $this->middleware('auth');
-}
-
-/**
- * Show chats
- *
- * @return \Illuminate\Http\Response
- */
-public function index()
-{
-  return view('chat');
-}
-
-/**
- * Fetch all messages
- *
- * @return Message
- */
-public function fetchMessages()
-{
-  return Message::with('user')->get();
-}
-
-/**
- * Persist message to database
- *
- * @param  Request $request
- * @return Response
- */
-public function sendMessage(Request $request)
-{
-  $user = Auth::user();
-
-  $message = $user->messages()->create([
-    'message' => $request->input('message')
-  ]);
-
-  broadcast(new MessageSent($user, $message))->toOthers();
-
-  return ['status' => 'Message Sent!'];
-}
+         return view('partialsmessages', compact('messages'));
+    }
+  
 
 }
