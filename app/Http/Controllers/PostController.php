@@ -15,7 +15,7 @@ class PostController extends Controller
     {
         $page = 1;
         $sort = "date-desc";
-        $key = "test";
+        $key = "all";
         $cat = "all";
 
         $query = Post::query();
