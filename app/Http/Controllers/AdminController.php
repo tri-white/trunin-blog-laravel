@@ -16,7 +16,7 @@ class AdminController extends Controller
         Comment::where('userid', $userId)->delete();
         Post::where('userid', $userId)->delete();
         User::find($userId)->delete();
-        return redirect()->route('welcome')->with('success', 'Користувача видалено');
+        return redirect()->route('welcome', ['page'=>1, 'searchKey'=>'all','category'=>'all','sort'=>'date-desc'])->with('success', 'Користувача видалено');
     }
 
     public function removePost(Request $request, $postId)
@@ -24,13 +24,13 @@ class AdminController extends Controller
         Comment::where('postid', $postId)->delete();
         Like::where('postid',$postId)->delete();
         Post::find($postId)->delete();
-        return redirect()->route('welcome')->with('success', 'Пост видалено');
+        return redirect()->route('welcome', ['page'=>1, 'searchKey'=>'all','category'=>'all','sort'=>'date-desc'])->with('success', 'Пост видалено');
     }
 
     public function removeComment(Request $request, $commentId)
     {
         Comment::find($commentId)->delete();
 
-        return redirect()->route('welcome')->with('success', 'Комментарій видалено');
+        return redirect()->route('welcome', ['page'=>1, 'searchKey'=>'all','category'=>'all','sort'=>'date-desc'])->with('success', 'Комментарій видалено');
     }
 }

@@ -130,7 +130,7 @@ class PostController extends Controller
         
         $post->save();
 
-        return redirect()->route('welcome')->with('success', 'Пост успішно створено.');
+        return redirect()->route('welcome', ['page'=>1, 'searchKey'=>'all','category'=>'all','sort'=>'date-desc'])->with('success', 'Пост успішно створено.');
     }
 
 

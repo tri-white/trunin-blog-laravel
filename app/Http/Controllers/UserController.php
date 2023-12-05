@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         Auth::logout();
 
-        return redirect()->route('welcome');
+        return redirect()->route('welcome', ['page'=>1, 'searchKey'=>'all','category'=>'all','sort'=>'date-desc']);
     }
     public function login(Request $request)
     {
@@ -41,7 +41,7 @@ class UserController extends Controller
         ];
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('welcome');
+            return redirect()->route('welcome', ['page'=>1, 'searchKey'=>'all','category'=>'all','sort'=>'date-desc']);
         }
 
         return redirect()->back()->with('error', 'Неправильний емейл або пароль.'); 
